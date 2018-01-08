@@ -190,7 +190,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     ('css',os.path.join(STATIC_URL, 'css'),
     ('js',os.path.join(STATIC_URL, 'js')),
-    ('img', os.path.join(STATIC_URL, 'img'),
+    ('img', os.path.join(STATIC_URL, 'img')
 )
 
 #Media files for upload and storage
