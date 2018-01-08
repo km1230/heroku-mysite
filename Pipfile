@@ -7,11 +7,13 @@ name = "pypi"
 
 [packages]
 
-django = "==2.0"
+django = "*"
 python-decouple = "*"
 pillow = "*"
 django-multiselectfield = "*"
 social-auth-app-django = "*"
+dj-database-url = "*"
+whitenoise = "*"
 
 
 [dev-packages]

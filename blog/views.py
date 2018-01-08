@@ -168,6 +168,17 @@ def post_page(request, key):
 
 
 """
+Archives
+"""
+def archives(request):
+	post_list = list(reversed(Post.objects.order_by('time')))
+	p = Paginator(post_list, 20)
+	page = request.GET.get('page')
+	posts = p.get_page(page)
+	return render(request, 'archives.html', {'posts':posts})
+
+
+"""
 Add new post
 """
 @login_required

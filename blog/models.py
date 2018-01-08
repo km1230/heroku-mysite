@@ -19,7 +19,7 @@ class Post(models.Model):
 		('Python3.6','Python3.6'),		
 		('Django2.0', 'Django2.0'),
 		('Nodejs','Nodejs'),
-		('jQuery','jQuery'),
+		('Javascript','Javascript'),
 		('CSS','CSS'),
 		('Font-end','Font-end'),
 		('Back-end','Back-end'),

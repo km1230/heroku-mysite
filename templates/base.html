@@ -35,6 +35,21 @@
           {% if request.user.is_authenticated %}
           <div class='navbar-nav mr-auto'>
             <a class="nav-item nav-link" href='{% url "blog" %}' id='home'><i class="fas fa-home"></i> Home</a>
+            <div class='nav-item dropdown'>
+              <a class='nav-link dropdown-toggle' href='#' data-toggle='dropdown' id='categories'><i class='fas fa-sitemap'></i> Categories</a>
+              <div class='dropdown-menu'>
+                <a class='dropdown-item' href='{% url "post_tag" key="Font-end" %}'>Font-end</a>
+                <a class='dropdown-item' href='{% url "post_tag" key="Back-end" %}'>Back-end</a>
+                <div class='dropdown-divider'></div>
+                <a class='dropdown-item' href='{% url "post_tag" key="Bootstrap" %}'>Bootstrap</a>
+                <a class='dropdown-item' href='{% url "post_tag" key="CSS" %}'>CSS</a>
+                <a class='dropdown-item' href='{% url "post_tag" key="Django2.0" %}'>Django</a>
+                <a class='dropdown-item' href='{% url "post_tag" key="Javascript" %}'>Javascript</a>
+                <a class='dropdown-item' href='{% url "post_tag" key="Nodejs" %}' style='display: none'>Nodejs</a>
+                <a class='dropdown-item' href='{% url "post_tag" key="Python3.6" %}'>Python</a>
+              </div>
+            </div>
+            <a class='nav-item nav-link' href='{% url "archives" %}' id='archives'><i class='fas fa-archive'></i> Archives</a>
             <a class="nav-item nav-link" href='{% url "myaccount" %}' id='myaccount'><i class='fas fa-user'></i> MyAccount</a>
             {% if request.user.email == 'moklavie@gmail.com' %}
             <a class="nav-item nav-link" href='{% url "admin:index" %}' id='admin'><i class='fas fa-suitcase'></i> Admin</a>
@@ -47,6 +62,21 @@
           {% else %}
           <div class='navbar-nav mr-auto'>
             <a class="nav-item nav-link" href='{% url "blog" %}' id='home'><i class="fas fa-home"></i> Home</a>
+            <div class='nav-item dropdown'>
+              <a class='nav-link dropdown-toggle' href='#' data-toggle='dropdown' id='categories'><i class='fas fa-sitemap'></i> Categories</a>
+              <div class='dropdown-menu'>
+                <a class='dropdown-item' href='{% url "post_tag" key="Font-end" %}'>Font-end</a>
+                <a class='dropdown-item' href='{% url "post_tag" key="Back-end" %}'>Back-end</a>
+                <div class='dropdown-divider'></div>
+                <a class='dropdown-item' href='{% url "post_tag" key="Bootstrap" %}'>Bootstrap</a>
+                <a class='dropdown-item' href='{% url "post_tag" key="CSS" %}'>CSS</a>
+                <a class='dropdown-item' href='{% url "post_tag" key="Django2.0" %}'>Django</a>
+                <a class='dropdown-item' href='{% url "post_tag" key="Javascript" %}'>Javascript</a>
+                <a class='dropdown-item' href='{% url "post_tag" key="Nodejs" %}' style='display: none'>Nodejs</a>
+                <a class='dropdown-item' href='{% url "post_tag" key="Python3.6" %}'>Python</a>
+              </div>
+            </div>
+            <a class='nav-item nav-link' href='{% url "archives" %}' id='archives'><i class='fas fa-archive'></i> Archives</a>
           </div>
           <div class='navbar-nav'>
             <a class="nav-item nav-link" href='{% url "login" %}' id='login'><i class='fas fa-sign-in-alt'></i> Login</a>
