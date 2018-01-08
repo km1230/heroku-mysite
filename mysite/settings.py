@@ -188,9 +188,7 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    ("css", os.path.join(STATIC_ROOT,'css')),
-    ("js", os.path.join(STATIC_ROOT, 'js')),
-    ('img', os.path.join(STATIC_ROOT, 'img'))
+    os.path.join(BASE_DIR, 'static'),
 )
 
 #Media files for upload and storage
