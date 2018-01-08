@@ -30,7 +30,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 # Forcing HTTPS
-#SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = True
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'blog'
