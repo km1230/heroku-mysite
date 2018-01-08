@@ -1,0 +1,184 @@
+body {
+    background-color: #f3f3f3;
+}
+
+.rowspace {
+	height: 30px;
+}
+
+.helptext {
+    color: #b5b5b5; 
+    font-size: 0.75em;
+    font-family: Courier;
+}
+
+.title {
+	background: #343a40;
+	color: white;
+	font-size: 1.25rem;
+	font-family: Verdana;
+	padding: 5px;
+}
+
+.date {
+	background: #009999;
+	max-width: 6rem;
+	font-size: 0.75rem;
+	color: white;
+	text-align: center;
+}
+
+.content {
+	max-width: 100%;
+	color: #268484;
+	font-size: 1rem;
+	font-family: Arial;
+	white-space: pre-wrap;
+}
+
+.content a{
+	color: white;
+    text-decoration: none;
+    padding: 0px 5px 0px 5px;
+    transition: 0.3s;
+    background-color: #009999;
+    border: solid transparent;
+    border-width: 1px;
+    border-radius: 25px;
+}
+
+.content a:hover {
+	border-radius: 0px;
+}
+
+code {
+    background-color: #ebebeb;
+    color: #d02c2c;
+    font-size: 15px;
+    font-family: Courier;
+    box-shadow: 3px 3px 3px grey;
+    margin: 0px 5px;
+}
+
+.bq {
+    box-shadow: 5px 5px 5px grey;
+    font-size: 1em;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.prettyprint {
+    padding:10px;
+}
+
+a.read_more{
+    background: none;
+	color: #5c5c5c;
+	text-decoration: none;
+	padding: 10px;
+	border: #5c5c5c solid 1px;
+	border-radius: 25px;
+}
+
+a.read_more:hover {
+	border-radius: 0px;
+}
+
+.page {
+    font-size: 1rem;
+    color: #b5b5b5;
+    font-family: Courier;
+    background-color: none;
+    border: none;
+
+}
+
+.page a{
+    background-color: transparent;
+    color: #b5b5b5;
+    border-bottom: solid #b5b5b5 1px;
+    border-radius: 0px;
+}
+
+.page a:hover{
+    text-decoration: none;
+    color: #d02c2c;
+    border-bottom: solid #d02c2c 1px;
+}
+
+.loginform {
+    background: #268787;
+    border: solid #268787 1px;
+    border-radius: 25px;
+    padding: 0px;
+}
+
+.loginform a{
+    color: white;
+    text-decoration: underline;
+}
+
+.loginform a:hover {
+    color: #d02c2c;
+    background-color: #f3f3f3;
+}
+
+.helptext {
+    color: #b5b5b5;
+    font-size: 0.75rem;
+    font-family: Courier;
+}
+
+.helptext a{
+    color: #b5b5b5;
+    text-decoration: underline;
+}
+
+.helptext a:hover {
+    color: #d02c2c;
+}
+
+.posttools {
+    background-color: #268484;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.tagfield {
+    list-style-type: none;
+}
+
+.account_header {
+    background-color: #268484;
+    padding: 3px;
+    font-weight: bold;
+}
+
+.comment_author{
+    border: #268484 solid 1px
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.comment_content{
+    border: #5b5b5b solid 1px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.footer_contact ul{
+    list-style-type: none;
+}
+
+.footer a{
+    text-decoration: underline;
+    color: #b5b5b5;
+}
+
+.footer a:hover{
+    color: #009999;
+}
+
+#editor {
+    height: 300px;
+}

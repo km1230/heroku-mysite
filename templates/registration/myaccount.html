@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+MyAccount - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<form method='POST'>
+	{% csrf_token %}
+	<div class='card'>
+		<div class='card-header d-flex justify-content-center bg-dark text-white'><h1>My Account</h1></div>
+		<div class='card-body'>
+			<div class='row'>
+				<dt class='col col-lg-3'></dt>
+				<dd class='col-12 col-lg-9 d-flex justify-content-center account_header text-white'>Basic Information</dd>
+			</div>
+			{% for field in form %}
+			<div class='row'>
+				<dt class='col-12 col-lg-3'>{{ field.label_tag }}</dt>
+				{% if field.name != 'password' %}
+				<dd class='col-12 col-lg-9'>{{ field }}</dd>
+				{% endif %}
+				{% if field.help_text %}
+				<dd class='col-12 col-lg-9 offset-lg-3 helptext'>{{ field.help_text |safe }}</dd>
+				{% endif %}
+			</div>
+			{% endfor %}
+			<div class='rowspace'></div>
+			<div class='row'>
+				<dt class='col col-lg-3'></dt>
+				<dd class='col-12 col-lg-9 d-flex justify-content-center account_header text-white'>Additional Information</dd>
+			</div>
+			{% for field in profile_form %}
+			<div class='row'>
+				<dt class='col-12 col-lg-3'>{{ field.label_tag }}</dt>
+				{% if field.name == 'day_of_birth' %}
+				<dd class='col-12 col-lg-9'>
+					<div class='row' id='dob'>
+						<div class='col-1'></div>
+						{{ field }}
+						<div class='col-1'></div>
+					</div>
+				</dd>
+				{% else %}
+				<dd class='col-12 col-lg-9'>{{ field }}</dd>
+				{% endif %}
+				{% if field.help_text %}
+				<dd class='col-12 col-lg-9 offset-lg-3 helptext'>{{ field.help_text |safe }}</dd>
+				{% endif %}
+			</div>
+			{% endfor %}
+		</div>
+		<div class='card-footer'>
+			<button type='submit' class='btn btn-block btn-info'>Update</button>
+		</div>
+	</div>
+</form>
+{% endblock %}

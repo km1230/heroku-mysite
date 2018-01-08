@@ -1,0 +1,115 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Open Tag Protocal -->
+    <meta property="og:description" content="{{ post.content }}">
+    <meta property="og:image" content="{{ post.photo }}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel='stylesheet' href="{% static 'css/mystyle.css' %}">
+    <script src='https://code.jquery.com/jquery-3.2.1.js'></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert"></script>
+    <script src='{% static "js/myjquery.js" %}'></script>
+    <!-- for facebook dashboard analysis -->
+    <script src='{% static "js/fb.js" %}'></script>
+    <link rel='shortcut icon' type='image/x-icon' href='{% static "img/favicon.ico" %}'>
+    <title>{% block title %}Kavie Django Blog of Languages{% endblock %}</title>
+  </head>
+  <body onload="PR.prettyPrint()">
+    
+    <div class='container'>    
+
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href='{% url "blog" %}'><img src='{% static "img/favicon.ico" %}' style='width:30px; height:30px'></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          {% if request.user.is_authenticated %}
+          <div class='navbar-nav mr-auto'>
+            <a class="nav-item nav-link" href='{% url "blog" %}' id='home'><i class="fas fa-home"></i> Home</a>
+            <a class="nav-item nav-link" href='{% url "myaccount" %}' id='myaccount'><i class='fas fa-user'></i> MyAccount</a>
+            {% if request.user.email == 'moklavie@gmail.com' %}
+            <a class="nav-item nav-link" href='{% url "admin:index" %}' id='admin'><i class='fas fa-suitcase'></i> Admin</a>
+            <a class="nav-item nav-link" href='{% url "post_new" %}' id='postnew'><i class='fas fa-edit'></i> PostNew</a>
+            {% endif %}
+          </div>
+          <div class='navbar-nav'>
+            <a class="nav-item nav-link" href='{% url "logout" %}'><i class='fas fa-sign-out-alt'></i> Logout</a>
+          </div>
+          {% else %}
+          <div class='navbar-nav mr-auto'>
+            <a class="nav-item nav-link" href='{% url "blog" %}' id='home'><i class="fas fa-home"></i> Home</a>
+          </div>
+          <div class='navbar-nav'>
+            <a class="nav-item nav-link" href='{% url "login" %}' id='login'><i class='fas fa-sign-in-alt'></i> Login</a>
+            <a class="nav-item nav-link" href='{% url "register" %}' id='signup'><i class='fas fa-pencil-alt'></i> SignUp</a>
+          </div>
+          {% endif %}
+        </div>
+      </nav>
+
+      <div class='rowspace'></div>
+
+      <div class='row'>
+        <div class='col-xs col-lg-2'></div>
+        <div class='col-xs col-lg-8'>
+          <div class='rowspace'></div>
+          <div class='rowspace'></div>
+          {% block content %}
+          {% endblock %}
+        </div>
+        <div class='col-xs col-lg-2'></div>
+      </div>
+
+      <div class='rowspace'></div>
+
+      <div class='row'>
+        <div class='col-12 bg-dark text-secondary footer'>
+          <div class='row'>
+            <div class='col-12 col-lg-4 m-2 footer_aboutme'>
+              <h4>About Me</h4>
+              <div class='media'>
+                <img src='{% static "img/rayban.jpg" %}' class='img-fluid m-2' style='width: 64px; height: 64px;'>
+                <div class='media-body align-bottom'>
+                  <p>
+                    Kavie. A registered optometrist from HK. Currently an ICT student of UTAS. 
+                    Have a passion in webdev and machine learning.<br>
+                    This site is built in Python &amp; Django framework, JS &amp; jQuery &amp; Bootstrap.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class='col-12 col-lg-4'></div>
+            <div class='col-12 col-lg m-2 media footer_contact'>
+              <div class='media-body'>
+                <h4>Contact</h4>
+                <h6>Social Networks</h6>
+                <div class='fa-2x'>
+                  <a href='https://twitter.com/moklavie' target='_blank'><i class="fab fa-twitter m-2" data-fa-transform='shrink-3' data-fa-mask='fas fa-circle'></i></a>
+                  <a href='https://www.facebook.com/mokavie' target='_blank'><i class="fab fa-facebook-f m-2" data-fa-transform="shrink-3.5 down-1.6 right-1.25" data-fa-mask="fas fa-circle"></i></a>
+                  <a href='https://github.com/km1230' target='_blank'><i class="fab fa-github m-2"></i></a>
+                  <a href='https://www.instagram.com/kaviemo' target='_blank'><i class='fab fa-instagram m-2' data-fa-transform='shrink-3' data-fa-mask='fas fa-circle'></i></a>
+                </div>
+                <h6>Email</h6>
+                <span><i class='fas fa-envelope m-2 align-middle'></i><a href='mailto:moklavie@gmail.com'>moklavie@gmail.com</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+{% for post in posts %}
+<div class="row">
+	<div class='col-12'>
+    	<div class="title">{{ post.title }}</div>
+    </div>
+    <div class='col-12 mb-3'>
+		<div class="date">{{ post.time|date:"Y - m - d" }}</div>
+	</div>
+
+	<div class='col-12 mb-3'>
+		{% for tag in post.tag %}
+	    {% if tag == 'Python3.6' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Script-Python3.6-blue.svg'></img></a>
+	    {% elif tag == 'Django2.0' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Framework-Django2.0-brightgreen.svg'></img></a>
+	    {% elif tag == 'Nodejs' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Framework-Nodejs-brightgreen.svg'></img></a>
+	    {% elif tag == 'jQuery' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Script-jQuery-e26ce0.svg'></img></a>
+	    {% elif tag == 'CSS' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Script-CSS-orange.svg'></img></a>
+	    {% elif tag == 'Font-end' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Dev-Font--end-lightgrey.svg'></img></a>
+	    {% elif tag == 'Back-end' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Dev-Back--end-lightgrey.svg'></img></a>
+	    {% elif tag == 'Bootstrap' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Script-Bootstrap-6842f4.svg'></img></a>
+	    {% endif %}
+	    {% endfor %}
+	</div>
+
+	<div class='col-12 mb-3'>
+		{% if post.photo %}
+        <img src="{{ post.photo }}" alt="{{ post.title }}" class="img-fluid img-thumbnail">
+        {% elif post.photo_upload %}
+        <img src="{{post.photo_upload.url}}" alt="{{ post.title }}" class="img-fluid img-thumbnail">
+        {% endif %}
+    </div>
+    
+    <div class='col-12 content mb-4'>{{ post.content | truncatewords_html:"5" | safe}}</div>
+
+    <div class='col-12 d-flex justify-content-center align-item-center mb-5'>
+	    <a class='read_more' href='{% url "page" key=post.pk %}'>Read More</a>
+	</div>
+</div>
+{% endfor %}
+
+<div class='container d-flex justify-content-center align-item-center page mb-3'>
+
+	{% if posts.has_previous %}
+	<a href='?page=1' class='mr-2'><i class='fas fa-fast-backward'></i></a>
+	<a href='?page={{ posts.previous_page_number }}' class='mr-2'><i class='fas fa-step-backward'></i></a>
+	{% endif %}
+
+	<span>Page {{ posts.number }} of {{ posts.paginator.num_pages }}</span>
+
+	{% if posts.has_next %}
+	<a href='?page={{ posts.next_page_number }}' class='ml-2'><i class='fas fa-step-forward'></i></a>
+	<a href='?page={{ posts.paginator.num_pages }}' class='ml-2'><i class='fas fa-fast-forward'></i></a>
+	{% endif %}
+		
+</div>
+
+
+{% endblock %}

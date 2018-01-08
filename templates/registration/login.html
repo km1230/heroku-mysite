@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Login - {{block.super}}
+{% endblock %}
+
+{% block content %}
+
+<!--Redirect authorized user to MyAccount -->
+{% if request.user.is_authenticated %}
+<head>
+	<meta http-equiv="refresh" content="0; url='../myaccount/'">
+</head>
+{% endif %}
+
+<div class='row'>
+	<div class='col-10 offset-1 col-lg-6 offset-lg-3 justify-content-center card loginform'>
+		<div class='card-header text-white d-flex justify-content-center loginheader mt-0 mb-0'>
+			<h2>Welcome</h2>
+		</div>
+		<form method="POST">
+			<div class='card-body bg-white mb-0'>
+				{% csrf_token %}
+				{% for field in form %}
+				<div class='row form-group mb-0 mt-0'>
+					<dt class='col-12 col-lg-4'><label for='{{ field.name }}'>{{ field.label_tag }}</label></dt>
+					<dd class='col-12 col-lg-8'>{{ field }}</dd>
+				</div>
+				{% endfor %}
+				<div class='d-flex justify-content-center mb-0'>
+					<button class='btn btn-block btn-info'>Login</button>
+				</div>
+			</div>
+			<div class='card-footer d-flex justify-content-center'>
+				<span class='text-white'>New to here? <a href='{% url "register" %}'>Sign-Up!</a></span>
+			</div>
+		</form>
+	</div>
+	<div class='col'></div>
+</div>
+<div class='rowspace'></div>
+<div class='row'>
+	<div class='col-12 d-flex justify-content-center'>
+		<span class='helptext'>Forget your password? <a href="{% url 'password_reset' %}">Reset here</a></span>
+	</div>
+</div>
+<div class='rowspace'></div>
+<div class='row'>
+	<div class='col-12 d-flex justify-content-center helptext'>
+		--OR LOGIN WITH--
+	</div>
+	<div class='col-12 d-flex justify-content-center fa-4x'>
+		<a href='{% url "social:begin" "twitter" %}'><i class='fab fa-twitter-square m-2' style='color: #0fb1e2'></i></a>
+		<a href='{% url "social:begin" "github" %}'><i class='fab fa-github m-2' style='color: black'></i></a>
+		<a href='{% url "social:begin" "google-oauth2" %}'><i class='fab fa-google-plus m-2' style='color: #c91704'></i></a>
+		<a href='{% url "social:begin" "facebook" %}'><i class='fab fa-facebook-square m-2' style='color: #244f96'></i></a>
+	</div>
+</div>
+
+{% endblock %}

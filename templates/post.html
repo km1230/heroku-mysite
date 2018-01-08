@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ post.title }} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class='modal' id='boldModal'>
+	<div class='modal-dialog'>
+		<div class='modal-content'>
+			<div class='modal-header bg-dark text-white'>
+				<div class='modal-title'><h2>Bold</h2></div>
+				<button class='close text-white' data-dismiss='modal'>&times;</button>
+			</div>
+			<form class='form-group'>
+			<div class='modal-body'>
+				<textarea class='form-control' id='boldContent' autofocus></textarea>
+			</div>
+			<div class='modal-footer bg-light'>
+				<button class='btn btn-secondary' data-dismiss='modal'>Cancel</button>
+				<button class='btn btn-primary' type='button' id='boldButton' data-dismiss='modal'>Bold it</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class='modal' id='urlModal'>
+	<div class='modal-dialog'>
+		<div class='modal-content'>
+			<div class='modal-header bg-dark text-white'>
+				<h2>URL</h2>
+				<button class='close text-white' data-dismiss='modal'>&times;</button>
+			</div>
+			<form class='form-group'>
+				<div class='modal-body'>
+					<div class='input-group'>
+						<div class='input-group-prepend'><span class='input-group-text'>Title:</span></div>
+						<input type='url' class='form-control' placeholder="e.g. Google" id='urlTitle'>
+					</div>
+					<div class='input-group'>
+						<div class='input-group-prepend'><span class='input-group-text'>Link:</span></div>
+						<input type='url' class='form-control' placeholder="e.g. http://google.com" id='urlContent' autofocus>
+					</div>
+				</div>		
+				<div class='modal-footer bg-light'>
+					<button class='btn btn-secondary' data-dismiss='modal'>Cancel</button>
+					<button class='btn btn-primary' type='button' id='urlButton' data-dismiss='modal'>Add</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class='modal' id='imgModal'>
+	<div class='modal-dialog'>
+		<div class='modal-content'>
+			<div class='modal-header bg-dark text-white'>
+				<h2>Image Link</h2>
+				<buttton class='close text-white' data-dismiss='modal'>&times;</buttton>
+			</div>
+			<form class='form-group'>
+				<div class='modal-body'>
+					<input class='form-control' type='url' placeholder="e.g. http://www.example.com/image.jpg" id='imgContent'>
+				</div>
+				<div class='modal-footer'>
+					<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>
+					<button type='button' class='btn btn-primary' id='imgButton' data-dismiss='modal'>Add Img Link</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class='modal' id='kbdModal'>
+	<div class='modal-dialog'>
+		<div class='modal-content'>
+			<div class='modal-header bg-dark text-white'><h2>KBD Tag</h2></div>
+			<form class='form-group'>
+				<div class='modal-body'>
+					<input type='text' class='form-control' id='kbdContent' autofocus placeholder="name of file or path etc...">		
+				</div>
+				<div class='modal-footer bg-light'>
+					<button class='btn btn-secondary' data-dismiss='modal'>Cancel</button>
+					<button class='btn btn-primary' type='button' id='kbdButton' data-dismiss='modal'>Add</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class='modal' id='snippetModal'>
+	<div class='modal-dialog'>
+		<div class='modal-content'>
+			<div class='modal-header bg-dark text-white'>
+				<div class='modal-title'><h2>Snippet</h2></div>
+				<button class='close text-white' data-dismiss='modal'>&times;</button>
+			</div>
+			<form class='form-group'>
+			<div class='modal-body'>
+				<select class='custom-select' id='lang'>
+					<option value='' selected>Select Language</option>
+					<option value='css'>CSS</option>
+					<option value='html'>HTML5</option>
+					<option value='javascript'>Javascript</option>
+					<option value='python'>Python3</option>
+				</select>
+				<div class='rowspace'></div>
+				<div id='editor' class='form-control'></div>
+			</div>
+			<div class='modal-footer bg-light'>
+				<button class='btn btn-warning d-none' type='button' id='htmlEscape' data-toggle='tooltip' data-placement='left' title='Click to escape HTML before submitting this snippet'>Escape Html</button>
+				<button class='btn btn-secondary' data-dismiss='modal'>Cancel</button>
+				<button class='btn btn-primary' type='button' id='snippetButton' data-dismiss='modal'>Insert Snippet</button>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class='col-12'>
+    	<div class="title">{{ post.title }}</div>
+    </div>
+    <div class='col-12 mb-3'>
+		<div class="date">{{ post.time|date:"Y - m - d" }}</div>
+	</div>
+
+	<div class='col-12 col-lg-8 mb-3 d-inline align-item-center'>
+		{% for tag in post.tag %}
+	    {% if tag == 'Python3.6' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Script-Python3.6-blue.svg'></img></a>
+	    {% elif tag == 'Django2.0' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Framework-Django2.0-brightgreen.svg'></img></a>
+	    {% elif tag == 'Nodejs' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Framework-Nodejs-brightgreen.svg'></img></a>
+	    {% elif tag == 'jQuery' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Script-jQuery-e26ce0.svg'></img></a>
+	    {% elif tag == 'CSS' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Script-CSS-orange.svg'></img></a>
+	    {% elif tag == 'Font-end' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Dev-Font--end-lightgrey.svg'></img></a>
+	    {% elif tag == 'Back-end' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Dev-Back--end-lightgrey.svg'></img></a>
+	    {% elif tag == 'Bootstrap' %}
+	        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Script-Bootstrap-6842f4.svg'></img></a>
+	    {% endif %}
+	    {% endfor %}
+	</div>
+	<div class='col-12 col-lg-4 mb-3 fa-lg d-inline align-item-center'>
+		<a href="https://twitter.com/share?text={{post.title}}"><i class='fab fa-twitter' data-fa-transform='shrink-5' data-fa-mask='fas fa-circle' style='color: #1DA1F2'></i></a>
+		<a href='https://www.facebook.com/dialog/share?app_id=388159358278841&display=popup&href=https://km1230.pythonanywhere.com{% url "page" key=post.pk %}'><i class="fab fa-facebook-f" data-fa-transform="shrink-3.5 down-1.6 right-1.25" data-fa-mask="fas fa-circle" style='color: #4267b2'></i></a>
+	</div>
+
+	<div class='col-12 mb-3'>
+		{% if post.photo %}
+        <img src="{{ post.photo }}" alt="{{ post.title }}" class="img-fluid img-thumbnail">
+        {% elif post.photo_upload %}
+        <img src="{{post.photo_upload.url}}" alt="{{ post.title }}" class="img-fluid img-thumbnail">
+        {% endif %}
+    </div>
+    
+    <div class='col-12 content mb-4'>{{ post.content | safe}}</div>
+</div>
+<hr>
+<div class='row'>
+	<div class='card' style='width: 100%'>
+		<div class='card-header bg-info text-white d-flex justify-content-center'>
+			<h2>Comments</h2>
+		</div>
+		<div class='card-body row'>
+			{% if comment %}
+			{% for c in comment %}
+			<dt class='col-12 col-lg-3 comment_author'>{{ c.author }}</dt>
+			<dd class='col-12 col-lg-9 comment_content'>{{ c.content | safe}}</dd>
+			<dd class='col-4 offset-8 d-flex helptext justify-content-end'>{{ c.time }}</dd>
+			{% endfor %}
+			{% else %}
+			<div class='col-12 d-flex justify-content-center helptext'>There is no comment yet</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+<div class='rowspace'></div>
+<form method="POST">
+	{% csrf_token %}
+	<div class='row'>
+		<div class='card' style='width: 100%'>
+			<div class='card-header bg-dark text-white d-flex justify-content-center'><h2>New Comment</h2></div>
+			{% if not request.user.is_authenticated %}
+			<div class='card-body'>
+				<div class='col-12 d-flex justify-content-center helptext'>
+					<span>Please <a href='{% url "login" %}?next={{ request.path }}'>Login</a> to comment</span>
+				</div>
+			</div>
+			{% else %}
+			<div class='card-body'>
+				<div class='row mb-3'>
+					<dt class='col-12 col-lg-3'><label>Tools:</label></dt>
+					<dd class='col-12 col-lg-9 bg-info posttools d-flex justify-content-center'>
+						<button type='button' class='btn btn-sm btn-light mr-2' id='bold'>B</button>
+							<button type='button' class='btn btn-sm btn-light mr-2' id='line'>Line</button>
+							<button type='button' class='btn btn-sm btn-light mr-2' id='url'>Url</button>
+							<button type='button' class='btn btn-sm btn-light mr-2' id='img'>Img</button>
+							<button type='button' class='btn btn-sm btn-light mr-2' id='kbd'>kbd</button>
+							<button type='button' class='btn btn-sm btn-light mr-2' id='snippet'>Snippet</button>
+					</dd>
+				</div>
+				{% for field in form %}
+				<div class='row'>
+					<dt class='col-12 col-lg-3'>
+						<label for='{{ field.name }}'>{{ field.label_tag }}</label>
+					</dt>
+					<dd class='col-12 col-lg-9'>{{ field }}</dd>
+					{% if field.help_text %}
+					<dd class='col-12 col-lg-9 offset-lg-3'>{{ field.help_text }}</dd>
+					{% endif %}
+				</div>
+				{% endfor %}
+			</div>
+			<div class='card-footer'>
+				<button type='submit' class='btn btn-block btn-primary'>Comment</button>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</form>
+
+<script src='{% static "js/ace/src-noconflict/ace.js" %}' type="text/javascript" charset="utf-8"></script>
+<script src="{% static 'js/posttools.js' %}"></script>
+{% endblock %}
