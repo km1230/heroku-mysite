@@ -193,7 +193,9 @@ def post_new(request):
 	if request.method == "POST":
 		temp = PostForm(request.POST)     #request.POST to collect data from forms
 		if temp.is_valid():
+			content = temp.change_content()
 			postform = temp.save(commit=False)
+			postform.content = content
 			postform.author = auth.models.User.objects.get(email='moklavie@gmail.com')
 			postform.save()							#as long as the ModelForm is used to associate models to forms, save() can be used
 			return blogindex(request)

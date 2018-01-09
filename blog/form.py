@@ -16,6 +16,27 @@ class PostForm(forms.ModelForm):
 		model = Post
 		fields = ('title', 'content', 'photo', 'photo_upload','tag')  #which fields are being used in the form
 
+	def change_content(self):
+		data = self.cleaned_data['content']+'\n'
+		lines = data.split('\n')
+		newLines = []
+		for l in lines:
+			l = re.sub('`kbd`', '<code>', l)
+			l = re.sub('`endkbd`', '</code>', l)
+			l = re.sub('`bold`', '<b>', l)
+			l = re.sub('`endbold`', '</b>', l)
+			l = re.sub('`line`', '<hr>', l)
+			l = re.sub('`url`', '<a href="', l)
+			l = re.sub('`midurl`', '" target="_blank">', l)
+			l = re.sub('`endurl`', '</a>', l)
+			l = re.sub('`img`', '<img src="', l)
+			l = re.sub('`endimg`', '" class="img-thumbnail">', l)
+			l = re.sub('`snippet`', '<pre class="prettyprint">', l)
+			l = re.sub('`endsnippet`', '</pre>', l)
+			newLines.append(l)
+		newData = '\n'.join(newLines)
+		print('newData: '+newData)
+		return newData
 
 """
 CommentForm
