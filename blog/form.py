@@ -2,6 +2,7 @@ from django import forms
 from .models import Post, Comment, Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, UserChangeForm
+import re
 
 """
 PostForm
@@ -25,6 +26,30 @@ class CommentForm(forms.ModelForm):
 	class Meta:
 		model = Comment
 		fields = ('content',)
+
+	def change_content(self):
+		data = self.cleaned_data['content']+'\n'
+		lines = data.split('\n')
+		newLines = []
+		for l in lines:
+			l = re.sub('<', '&lt;', l)	
+			l = re.sub('>', '&gt;', l)
+			l = re.sub('`kbd`', '<code>', l)
+			l = re.sub('`endkbd`', '</code>', l)
+			l = re.sub('`bold`', '<b>', l)
+			l = re.sub('`endbold`', '</b>', l)
+			l = re.sub('`line`', '<hr>', l)
+			l = re.sub('`url`', '<a href="', l)
+			l = re.sub('`midurl`', '" target="_blank">', l)
+			l = re.sub('`endurl`', '</a>', l)
+			l = re.sub('`img`', '<img src="', l)
+			l = re.sub('`endimg`', '" class="img-thumbnail">', l)
+			l = re.sub('`snippet`', '<pre class="prettyprint">', l)
+			l = re.sub('`endsnippet`', '</pre>', l)
+			newLines.append(l)
+		newData = '\n'.join(newLines)
+		print('newData: '+newData)
+		return newData
 
 
 """

@@ -79,7 +79,7 @@
 			<div class='modal-header bg-dark text-white'><h2>KBD Tag</h2></div>
 			<form class='form-group'>
 				<div class='modal-body'>
-					<input type='text' class='form-control' id='kbdContent' autofocus placeholder="name of file or path etc...">		
+					<input type='text' class='form-control' id='kbdContent' autofocus placeholder="e.g. a sentence of code...">		
 				</div>
 				<div class='modal-footer bg-light'>
 					<button class='btn btn-secondary' data-dismiss='modal'>Cancel</button>
@@ -173,7 +173,7 @@
 			{% if comment %}
 			{% for c in comment %}
 			<dt class='col-12 col-lg-3 comment_author'>{{ c.author }}</dt>
-			<dd class='col-12 col-lg-9 comment_content'>{{ c.content | safe}}</dd>
+			<dd class='col-12 col-lg-9 comment_content'>{{ c.content | safe }}</dd>
 			<dd class='col-4 offset-8 d-flex helptext justify-content-end'>{{ c.time }}</dd>
 			{% endfor %}
 			{% else %}
@@ -198,7 +198,7 @@
 			<div class='card-body'>
 				<div class='row mb-3'>
 					<dt class='col-12 col-lg-3'><label>Tools:</label></dt>
-					<dd class='col-12 col-lg-9 bg-info posttools d-flex justify-content-center'>
+					<dd class='col-12 col-lg-9 posttools d-flex justify-content-center'>
 						<button type='button' class='btn btn-sm btn-light mr-2' id='bold'>B</button>
 							<button type='button' class='btn btn-sm btn-light mr-2' id='line'>Line</button>
 							<button type='button' class='btn btn-sm btn-light mr-2' id='url'>Url</button>
@@ -220,7 +220,7 @@
 				{% endfor %}
 			</div>
 			<div class='card-footer'>
-				<button type='submit' class='btn btn-block btn-primary'>Comment</button>
+				<button type='submit' class='btn btn-block btn-info'>Comment</button>
 			</div>
 			{% endif %}
 		</div>

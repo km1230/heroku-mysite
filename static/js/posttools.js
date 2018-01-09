@@ -5,14 +5,14 @@ $(document).ready(function(){
 	});
 	$('#boldButton').click(function(){
 		var temp = $('#id_content').val();
-		$('#id_content').val(temp + ' <b>' + $('#boldContent').val() + '</b> ');
+		$('#id_content').val(temp + ' `bold`' + $('#boldContent').val() + '`endbold` ');
 		$('#boldContent').val('');
 	});
 
 	//line
 	$('#line').click(function(){
 		var temp = $('#id_content').val();
-		$('#id_content').val(temp + "\n<hr>\n");
+		$('#id_content').val(temp + "\n`line`\n\n");
 	})
 
 	//url
@@ -22,7 +22,7 @@ $(document).ready(function(){
 	$('#urlButton').click(function(){
 		var temp = $('#id_content').val();
 		$('#id_content').val(
-			temp + ' <a href="' + $('#urlContent').val() + '" target="_blank">' + $('#urlTitle').val() +'</a> '
+			temp + ' `url`' + $('#urlContent').val() + '`midurl`' + $('#urlTitle').val() +'`endurl` '
 			);
 		$('#urlContent').val('');
 		$('#urlTitle').val('');
@@ -34,7 +34,7 @@ $(document).ready(function(){
 	});
 	$('#imgButton').click(function(){
 		var temp = $('#id_content').val();
-		$('#id_content').val(temp + '\n<img src="' + $('#imgContent').val() + '" class="img-thumbnail">\n');
+		$('#id_content').val(temp + '\n`img`' + $('#imgContent').val() + '`endimg`\n');
 		$('#imgContent').val('');
 	})
 
@@ -44,7 +44,7 @@ $(document).ready(function(){
 	});
 	$('#kbdButton').click(function(){
 		var temp = $('#id_content').val();
-		$('#id_content').val(temp + ' <code>' + $('#kbdContent').val() + '</code> ');
+		$('#id_content').val(temp + ' `kbd`' + $('#kbdContent').val() + '`endkbd` ');
 		$('#kbdContent').val('');
 	});
 
@@ -62,10 +62,8 @@ $(document).ready(function(){
 	    	var mode = 'ace/mode/' + lang;
 	    	editor.getSession().setMode(mode);
 	    	if(lang =='html'){
-	    		
 	    		$('#htmlEscape').toggleClass('d-none');
 	    		$('#htmlEscape').toggleClass('d-inline-block');
-
     			$('#htmlEscape').click(function(){
     				editor.findAll('<');
     				editor.replaceAll('&lt;');
@@ -87,7 +85,7 @@ $(document).ready(function(){
 		var editor = ace.edit("editor");
 		var temp = $('#id_content').val();
 		var code = editor.getValue();
-		$('#id_content').val(temp + '\n<pre class="prettyprint">\n' + code + '\n</pre>\n');
+		$('#id_content').val(temp + '\n`snippet`\n' + code + '\n`endsnippet`\n');
 	});
 	
 })

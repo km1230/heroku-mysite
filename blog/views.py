@@ -151,7 +151,10 @@ def post_page(request, key):
 		if request.method == "POST":
 			temp = CommentForm(request.POST)
 			if temp.is_valid():
+				content = temp.change_content()
 				form = temp.save(commit=False)
+				form.content = content
+				print('form.content: '+form.content)
 				form.parent_post = post
 				form.author = request.user
 				form.save()
@@ -163,7 +166,7 @@ def post_page(request, key):
 			form = CommentForm()
 	else:
 		form = ''
-	comment= list(reversed(Comment.objects.filter(parent_post=post).order_by('time')))
+	comment = list(reversed(Comment.objects.filter(parent_post=post).order_by('time')))
 	return render(request, 'post.html', {'post': post, 'comment': comment, 'form':form, 'error':error})
 
 
