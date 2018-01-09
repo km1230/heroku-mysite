@@ -1,6 +1,6 @@
 __pycache__/
 *.py[cod]
 *.env
-static/img/
-media/
+static/img
+media
 *.sqlite3
