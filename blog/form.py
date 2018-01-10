@@ -82,7 +82,7 @@ class Registration(UserCreationForm):					#create a subclass 'UserCreateForm' un
 	password1 = forms.CharField(
 		required=True, 
 		min_length=8 ,
-		help_text='<ul><li>At least 8 chars with numbers + characters/li><li>Should Not be common password</li><li>Should not be similiar to your profile information</li></ul>', 
+		help_text='<ul><li>At least 8 chars with numbers + characters</li><li>Should Not be common password</li><li>Should not be similiar to your profile information</li></ul>', 
 		widget=forms.PasswordInput)
 
 	class Meta:
