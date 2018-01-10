@@ -23,7 +23,7 @@ Sign Up - {{ block.super }}
                 </dt>
                 <dd class='col-12 col-lg-9'>{{ field }}</dd>
                 {% if field.help_text %}
-                <dd class='col-9 offset-3 helptext'>{{ field.help_text }}</dd>
+                <dd class='col-9 offset-3 helptext'>{{ field.help_text | safe }}</dd>
                 {% endif %}
             </div>
             {% endfor %}
