@@ -2,13 +2,13 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from .models import Post, Comment
 from .form import PostForm, CommentForm, Registration, UserAccount, UserProfile
-from django.contrib import auth, messages
+from django.contrib import auth
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator
-from django.contrib.auth import views as av
+#from django.contrib.auth import views as av
 
 
 """
@@ -186,8 +186,7 @@ Add new post
 """
 @login_required
 def post_new(request):
-	user = request.user
-	if user.email != "moklavie@gmail.com":
+	if request.user != User.objects.get(username='admin'):
 		return blogindex(request)
 
 	if request.method == "POST":
@@ -196,7 +195,7 @@ def post_new(request):
 			content = temp.change_content()
 			postform = temp.save(commit=False)
 			postform.content = content
-			postform.author = auth.models.User.objects.get(email='moklavie@gmail.com')
+			postform.author = User.objects.get(username='admin')
 			postform.save()							#as long as the ModelForm is used to associate models to forms, save() can be used
 			return blogindex(request)
 		else: 
