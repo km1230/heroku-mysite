@@ -31,12 +31,12 @@ urlpatterns = [
     path('blog/<int:key>/', bv.post_page, name="page"),
     path('post/', bv.post_new, name="post_new"),
     path('post_tag/<key>/', bv.post_tag, name="post_tag"),
-    path('password_reset', av.password_reset, name='password_reset'),
-    path('password_reset_done', av.password_reset_done, name='password_reset_done'),
+    path('password_reset/', av.password_reset, name='password_reset'),
+    path('password_reset_done/', av.password_reset_done, name='password_reset_done'),
     path('reset/<uidb64>/<token>/', av.password_reset_confirm, name='password_reset_confirm'),
     path('reset/done/', av.password_reset_complete, name='password_reset_complete'),
-    path('change_password/', av.password_change, name='password_change'),
-    path('change_password/done/', bv.changepassworddone, name='password_change_done'),
+    #path('change_password/', av.password_change, name='password_change'),
+    #path('change_password/done/', bv.changepassworddone, name='password_change_done'),
     path('myaccount/', bv.useraccount, name='myaccount'),
     path('archives/', bv.archives, name='archives')
 ] 

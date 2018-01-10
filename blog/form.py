@@ -1,7 +1,7 @@
 from django import forms
 from .models import Post, Comment, Profile
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 import re
 
 """
@@ -105,7 +105,7 @@ class UserAccount(UserChangeForm):
 	first_name = forms.CharField(required=False, label='Nickname', help_text='You may update your nickname for display')
 	password = forms.CharField(
 		required=False, 
-		help_text='You may change your password at <a href="../change_password/">here</a>'
+		help_text='You may change your password at <a href="../password_reset/">here</a>'
 		)
 
 	class Meta:
