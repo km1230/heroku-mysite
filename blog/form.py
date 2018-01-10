@@ -79,8 +79,11 @@ Registration
 class Registration(UserCreationForm):					#create a subclass 'UserCreateForm' under superclass 'UserCreationFrom'
 	username = forms.CharField(required=True, max_length=20, widget=forms.TextInput(attrs={'autofocus':'autofocus'}))
 	email = forms.EmailField(required=True, help_text='Valid email required')
-	password1 = forms.CharField(required=True, min_length=8 ,
-		help_text='8-20 chars, with at least 1 alphabet + 1 number, may also add special characters', widget=forms.PasswordInput)
+	password1 = forms.CharField(
+		required=True, 
+		min_length=8 ,
+		help_text='<ul><li>At least 8 chars with numbers + characters/li><li>Should Not be common password</li><li>Should not be similiar to your profile information</li></ul>', 
+		widget=forms.PasswordInput)
 
 	class Meta:
 		model = User
