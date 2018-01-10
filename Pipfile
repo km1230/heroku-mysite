@@ -14,6 +14,7 @@ django-multiselectfield = "*"
 social-auth-app-django = "*"
 dj-database-url = "*"
 whitenoise = "*"
+"psycopg2" = "*"
 
 
 [dev-packages]
