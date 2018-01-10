@@ -173,10 +173,11 @@
 			{% if comment %}
 			{% for c in comment %}
 			<dt class='col-12 col-lg-3 comment_author'>
-				{% if {{ c.author.first_name }} %}
+				{%if c.author.first_name %}
 					{{ c.author.first_name }}
 				{% else %}
 					{{ c.author }}
+				{% endif %}
 			</dt>
 			<dd class='col-12 col-lg-9 comment_content'>{{ c.content | safe }}</dd>
 			<dd class='col-4 offset-8 d-flex helptext justify-content-end'>{{ c.time }}</dd>
