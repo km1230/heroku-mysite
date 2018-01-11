@@ -16,7 +16,6 @@ body {
 	background: #343a40;
 	color: white;
 	font-size: 1.25rem;
-	font-family: Verdana;
 	padding: 5px;
 }
 
@@ -28,11 +27,23 @@ body {
 	text-align: center;
 }
 
+.tag a:hover {
+    opacity: 0.5;
+}
+
+.share {
+    font-size:1.5rem;
+}
+
+.share a:hover {
+    opacity: 0.5;
+}
+
 .content {
 	max-width: 100%;
 	color: #268484;
 	font-size: 1rem;
-	font-family: Arial;
+    font-family: Verdana, Geneva, sans-serif;
 	white-space: pre-wrap;
 }
 
@@ -85,25 +96,22 @@ a.read_more:hover {
 }
 
 .page {
+    background-color: transparent;
     font-size: 1rem;
     color: #b5b5b5;
     font-family: Courier;
-    background-color: none;
-    border: none;
-
 }
 
 .page a{
+    font-size: 1rem;
     background-color: transparent;
     color: #b5b5b5;
-    border-bottom: solid #b5b5b5 1px;
-    border-radius: 0px;
+    font-family: Courier;
 }
 
 .page a:hover{
     text-decoration: none;
     color: #d02c2c;
-    border-bottom: solid #d02c2c 1px;
 }
 
 .loginform {
