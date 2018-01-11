@@ -45,7 +45,7 @@
         {% endif %}
     </div>
     
-    <div class='col-12 content mb-4'>{{ post.content | truncatewords_html:"5" | safe}}</div>
+    <div class='col-12 content mb-4'>{{ post.content | truncatewords_html:"10" | safe}}</div>
 
     <div class='col-12 d-flex justify-content-center align-item-center mb-5'>
 	    <a class='read_more' href='{% url "page" key=post.pk %}'>Read More</a>

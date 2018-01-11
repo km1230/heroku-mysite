@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Open Tag Protocal -->
-    <meta property="og:description" content="{{ post.content }}">
+    <meta property="og:description" content="{{ post.content | truncatewords_html:'10'}}">
     <meta property="og:image" content="{{ post.photo }}">
 
     <!--Pinterset analytics-->
