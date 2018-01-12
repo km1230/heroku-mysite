@@ -44,7 +44,15 @@ body {
 	color: #268484;
 	font-size: 1rem;
     font-family: Verdana, Geneva, sans-serif;
-	white-space: pre-wrap;
+	/* pre retains linebreak as input, line merge continous \s into single \s */
+    white-space: pre-line;
+    /* stop inhert word-wrap from .card */
+    word-wrap: normal;
+}
+
+.content pre{
+    white-space: pre;
+    overflow-x: scroll;
 }
 
 .content a{
