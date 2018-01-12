@@ -239,7 +239,7 @@ def json_feed(request):
 	    "title": "Dev Junior",
 	    "home_page_url": "http://devjunior.com",
 	    "feed_url": "http://devjunior.com/feed.json",
-	    "icon": "http://www.devjunior.com/static/img/favicon_200.png"
+	    "icon": "http://www.devjunior.com/static/img/favicon_200.png",
 	    "favicon": "http://www.devjunior.com/static/img/favicon.ef83680e7b40.png",
 	    "items": []
 	}
