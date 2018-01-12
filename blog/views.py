@@ -16,7 +16,7 @@ from django.http import JsonResponse
 Font page of blog
 """
 def blogindex(request):
-	post_list = list(reversed(Post.objects.order_by('time')))
+	post_list = Post.objects.all().order_by('-time')
 	for post in post_list:
 		post.title = '🔖 ' + post.title
 	p = Paginator(post_list, 5)
@@ -25,8 +25,7 @@ def blogindex(request):
 	return render(request, 'blog.html', {'posts': posts})
 
 def post_tag(request, key):
-	post_list = [p for p in Post.objects.all().order_by('time') if key in p.tag]
-	post_list = list(reversed(post_list))
+	post_list = [p for p in Post.objects.all().order_by('-time') if key in p.tag]
 	for post in post_list:
 		post.title = '🔖 ' + post.title
 	p = Paginator(post_list, 5)
@@ -167,7 +166,7 @@ def post_page(request, key):
 			form = CommentForm()
 	else:
 		form = ''
-	comment = list(reversed(Comment.objects.filter(parent_post=post).order_by('time')))
+	comment = Comment.objects.filter(parent_post=post).order_by('time')
 	return render(request, 'post.html', {'post': post, 'comment': comment, 'form':form, 'error':error})
 
 
@@ -175,7 +174,7 @@ def post_page(request, key):
 Archives
 """
 def archives(request):
-	post_list = list(reversed(Post.objects.order_by('time')))
+	post_list = Post.objects.order_by('-time')
 	p = Paginator(post_list, 20)
 	page = request.GET.get('page')
 	posts = p.get_page(page)
@@ -243,7 +242,7 @@ def json_feed(request):
 	    "favicon": "http://www.devjunior.com/static/img/favicon.ef83680e7b40.png",
 	    "items": []
 	}
-	posts = list(reversed(Post.objects.all()))
+	posts = Post.objects.order_by('-time')
 	for post in posts:
 		post_dict = {}
 		post_dict['id'] = str(post.pk)
