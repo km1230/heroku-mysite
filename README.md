@@ -6,7 +6,7 @@
 ## Schema:
 * ![Font-end](https://img.shields.io/badge/Dev-Font--end-lightgrey.svg) ![Bootstrap](https://img.shields.io/badge/Script-Bootstrap-6842f4.svg) ![CSS](https://img.shields.io/badge/Script-CSS-orange.svg) ![Javascript](https://img.shields.io/badge/Script-Javascript-e26ce0.svg)
 
-* ![Back-end](ttps://img.shields.io/badge/Dev-Back--end-lightgrey.svg) ![Python](https://img.shields.io/badge/Script-Python3.6-blue.svg) ![Django](https://img.shields.io/badge/Framework-Django2.0-brightgreen.svg)
+* ![Back-end](https://img.shields.io/badge/Dev-Back--end-lightgrey.svg) ![Python](https://img.shields.io/badge/Script-Python3.6-blue.svg) ![Django](https://img.shields.io/badge/Framework-Django2.0-brightgreen.svg)
 
 ## Build with packages:
 * [pipenv](https://docs.pipenv.org/) - A combination of pip and venv
