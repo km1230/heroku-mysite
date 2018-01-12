@@ -38,7 +38,8 @@ urlpatterns = [
     #path('change_password/', av.password_change, name='password_change'),
     #path('change_password/done/', bv.changepassworddone, name='password_change_done'),
     path('myaccount/', bv.useraccount, name='myaccount'),
-    path('archives/', bv.archives, name='archives')
+    path('archives/', bv.archives, name='archives'),
+    path('feed.json', bv.json_feed, name='feed')
 ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

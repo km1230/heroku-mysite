@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse
 from .models import Post, Comment
 from .form import PostForm, CommentForm, Registration, UserAccount, UserProfile
 from django.contrib import auth
@@ -8,6 +8,8 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.template.defaultfilters import truncatewords
+from django.http import JsonResponse
 
 
 """
@@ -226,3 +228,29 @@ def sendmail(request, title):
 			html_message=email_content,				#to render HTML message
 	)
 	return blogindex(request)
+
+
+"""
+JSON Feed
+"""
+def json_feed(request):
+	data = {
+	    "version": "https://jsonfeed.org/version/1",
+	    "title": "Dev Junior",
+	    "home_page_url": "http://devjunior.com",
+	    "feed_url": "http://devjunior.com/feed.json",
+	    "favicon": "http://www.devjunior.com/static/img/favicon.ef83680e7b40.png",
+	    "items": []
+	}
+	posts = list(reversed(Post.objects.all()))
+	for post in posts:
+		post_dict = {}
+		post_dict['id'] = str(post.pk)
+		post_dict['content_html'] = post.content
+		post_dict['summary'] = truncatewords(post.content, 20)
+		post_dict['url'] = reverse('page', kwargs={'key':post.pk})
+		data['items'].append(post_dict)
+
+	return JsonResponse(data)
+
+

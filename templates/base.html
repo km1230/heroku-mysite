@@ -53,6 +53,7 @@
               </div>
             </div>
             <a class='nav-item nav-link' href='{% url "archives" %}' id='archives'><i class='fas fa-archive'></i> Archives</a>
+            <a class='nav-item nav-link' href='{% url "feed" %}' id='archives'><i class='fas fa-rss-square'></i> Feed</a>
             <a class="nav-item nav-link" href='{% url "myaccount" %}' id='myaccount'><i class='fas fa-user'></i> MyAccount</a>
             {% if request.user.email == 'moklavie@gmail.com' %}
             <a class="nav-item nav-link" href='{% url "admin:index" %}' id='admin'><i class='fas fa-suitcase'></i> Admin</a>
@@ -80,6 +81,7 @@
               </div>
             </div>
             <a class='nav-item nav-link' href='{% url "archives" %}' id='archives'><i class='fas fa-archive'></i> Archives</a>
+            <a class='nav-item nav-link' href='{% url "feed" %}' id='archives'><i class='fas fa-rss-square'></i> Feed</a>
           </div>
           <div class='navbar-nav'>
             <a class="nav-item nav-link" href='{% url "login" %}' id='login'><i class='fas fa-sign-in-alt'></i> Login</a>
