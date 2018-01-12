@@ -1,7 +1,12 @@
-<div style='text-align: center'><img src='https://github.com/km1230/heroku-mysite/blob/master/static/img/favicon.png?raw=true'><br>
-<h1>Dev Junior</h1>
+<div style='display: flex; justify-content: center;'>
+	<img src='https://github.com/km1230/heroku-mysite/blob/master/static/img/favicon.png?raw=true'>
 </div>
-
+<div style='display: flex; justify-content: center;'>
+	<h1>Dev Junior</h1>
+</div>
+<div style='display: flex; justify-content: center;'>
+	<a href='http://devjunior.com' target='_blank'>http://devjunior.com</a>
+</div>
 
 This is a personal django blog for interest purpose.
 
