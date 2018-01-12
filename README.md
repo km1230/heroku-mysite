@@ -1,12 +1,6 @@
-<div style='display: flex; justify-content: center;'>
-	<img src='https://github.com/km1230/heroku-mysite/blob/master/static/img/favicon.png?raw=true'>
-</div>
-<div style='display: flex; justify-content: center;'>
-	<h1>Dev Junior</h1>
-</div>
-<div style='display: flex; justify-content: center;'>
-	<a href='http://devjunior.com' target='_blank'>http://devjunior.com</a>
-</div>
+<img src='https://github.com/km1230/heroku-mysite/blob/master/static/img/favicon.png?raw=true' align='center'>
+<h1 align='center'>Dev Junior</h1>
+<a href='http://devjunior.com' target='_blank' align='center'>http://devjunior.com</a>
 
 This is a personal django blog for interest purpose.
 
