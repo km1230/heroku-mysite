@@ -1,4 +1,4 @@
-<div style='justify-content: center'><img src='https://github.com/km1230/heroku-mysite/blob/master/static/img/favicon.png?raw=true'><br>
+<div style='text-align: center'><img src='https://github.com/km1230/heroku-mysite/blob/master/static/img/favicon.png?raw=true'><br>
 <h1>Dev Junior</h1>
 </div>
 
