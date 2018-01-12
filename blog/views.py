@@ -247,7 +247,6 @@ def json_feed(request):
 		post_dict = {}
 		post_dict['id'] = str(post.pk)
 		post_dict['title'] = post.title
-		post_dict['author'] = post.author
 		post_dict['content_html'] = post.content
 		post_dict['summary'] = truncatewords(post.content, 20)
 		post_dict['url'] = reverse('page', kwargs={'key':post.pk})
