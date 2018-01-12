@@ -1,6 +1,6 @@
-<img src='https://github.com/km1230/heroku-mysite/blob/master/static/img/favicon.png?raw=true' align='center'>
+<img align='center' src='https://github.com/km1230/heroku-mysite/blob/master/static/img/favicon.png?raw=true'>
 <h1 align='center'>Dev Junior</h1>
-<a href='http://devjunior.com' target='_blank' align='center'>http://devjunior.com</a>
+<a align='center' href='http://devjunior.com' target='_blank'>http://devjunior.com</a>
 
 This is a personal django blog for interest purpose.
 
