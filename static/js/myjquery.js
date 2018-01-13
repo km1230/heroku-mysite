@@ -34,4 +34,17 @@ $(document).ready(function(){
 
 	//enable tooltip
 	$('[data-toggle=tooltip]').tooltip();
+
+	//re-arrange col
+	if(screen.width > 960){
+			$('.sidebar').removeClass('order-first')
+		};
+	window.addEventListener('resize', ()=>{
+		if(screen.width > 960){
+			$('.sidebar').removeClass('order-first')
+		} else {
+			$('.sidebar').addClass('order-first')
+		};
+	});
+
 });

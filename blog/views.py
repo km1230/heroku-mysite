@@ -1,15 +1,17 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.db.models import Q
 from .models import Post, Comment
 from .form import PostForm, CommentForm, Registration, UserAccount, UserProfile
 from django.contrib import auth
 from django.contrib.auth.models import User
-from django.core.mail import send_mail
-from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
+from django.template.loader import render_to_string
 from django.template.defaultfilters import truncatewords
 from django.http import JsonResponse
+import re
 
 
 """
@@ -33,6 +35,18 @@ def post_tag(request, key):
 	posts = p.get_page(page)
 	return render(request, 'blog.html', {'posts': posts})
 
+def search(request):
+	query = request.GET['q']
+	error = ''
+	if query:
+		posts = Post.objects.filter(
+					        Q(title__icontains=query) |
+					        Q(content__icontains=query)
+				        ).order_by('-time')
+	if len(posts) < 1:
+		error = 'Sorry No result :('
+	return render(request, 'archives.html', {'posts':posts, 'error':error})
+
 """
 Register
 """
@@ -43,7 +57,7 @@ def register(request):
 	if request.method == "POST":
 		form = Registration(request.POST)
 		if form.is_valid():
-			checkfault, errorcode = form.check_email()
+			checkfault, error = form.check_email()
 			
 			if checkfault == False:
 				user = form.save()
@@ -54,12 +68,12 @@ def register(request):
 				title = "registration"						#auth.login()
 				return sendmail(request, title=title)
 			else:
-				return render(request, 'registration/registration.html', {'form':form, 'errorcode':errorcode})
+				return render(request, 'registration/registration.html', {'form':form, 'error':error})
 
 		else:
 			form = Registration()
-			errorcode = 'There is something wrong about your information!'
-			return render(request, 'registration/registration.html', {'form': form, 'errorcode': errorcode})
+			error = 'There is something wrong about your information!'
+			return render(request, 'registration/registration.html', {'form': form, 'error': error})
 	else:
 		form = Registration()
 		return render(request, 'registration/registration.html', {'form': form})
@@ -104,18 +118,6 @@ def logout(request):
 	auth.logout(request)
 	return blogindex(request)
 
-
-"""
-Change Password Done
-"""
-@login_required
-def changepassworddone(request):
-	status = request.user.is_authenticated
-	title = 'changepassword'
-	sendmail(request, title=title)
-	return render(request, 'registration/password_change_done.html')
-
-
 """
 MyAccount
 """
@@ -146,6 +148,21 @@ Post details
 def post_page(request, key):
 	post = Post.objects.get(pk=key)
 	post.title = "🔖 " + post.title
+	
+	#find sections and insert id to section headers
+	line = post.content.split('\n')
+	pattern = r'\d+?\.\s\<b\>\[(.*)\]\<\/b\>'		#to find ---> 5. <b> [escaping the angle brackets]</b>
+	sections = []
+	newLine = []
+	for l in line:
+		searchObj = re.search(pattern, l)
+		if searchObj:
+			section = searchObj.group(1)
+			sections.append(section)
+			l = '<div id="' + section + '"></div>' + '\n' + l
+		newLine.append(l)
+	post.content = '\n'.join(newLine)
+
 	error = ''
 	if request.user.is_authenticated:
 		if request.method == "POST":
@@ -167,7 +184,7 @@ def post_page(request, key):
 	else:
 		form = ''
 	comment = Comment.objects.filter(parent_post=post).order_by('time')
-	return render(request, 'post.html', {'post': post, 'comment': comment, 'form':form, 'error':error})
+	return render(request, 'post.html', {'post': post, 'comment': comment, 'form':form, 'error':error, 'sections':sections})
 
 
 """

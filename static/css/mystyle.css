@@ -12,6 +12,12 @@ body {
     font-family: Courier;
 }
 
+.error {
+    color: #d02c2c;
+    font-size: 2rem;
+    font-family: Courier;
+}
+
 .title {
 	background: #343a40;
 	color: white;
@@ -27,16 +33,16 @@ body {
 	text-align: center;
 }
 
-.tag a:hover {
-    opacity: 0.5;
-}
-
 .share {
     font-size:1.5rem;
+    transition: 0.5s;
 }
 
-.share a:hover {
-    opacity: 0.5;
+.share a:hover {font-size: 2rem;}
+
+.card{
+    flex-wrap: nowrap;
+    word-wrap: normal;
 }
 
 .content {
@@ -46,8 +52,6 @@ body {
     font-family: Verdana, Geneva, sans-serif;
 	/* pre retains linebreak as input, line merge continous \s into single \s */
     white-space: pre-line;
-    /* stop inhert word-wrap from .card */
-    word-wrap: normal;
 }
 
 .content pre{
@@ -68,6 +72,23 @@ body {
 
 .content a:hover {
 	border-radius: 0px;
+}
+
+.post .img-thumbnail{
+    box-shadow: 0px 0px 15px 2px grey;
+}
+
+.sections a{
+    color: #5b5b5b;
+    font-weight: bold;
+}
+
+.sections a:hover{
+    color: #d02c2c;
+}
+
+.tweet a:hover{
+    text-decoration: none;
 }
 
 code {
@@ -155,7 +176,6 @@ a.read_more:hover {
 }
 
 .posttools {
-    background-color: #268484;
     padding: 5px;
     border-radius: 5px;
 }

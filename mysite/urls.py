@@ -39,7 +39,8 @@ urlpatterns = [
     #path('change_password/done/', bv.changepassworddone, name='password_change_done'),
     path('myaccount/', bv.useraccount, name='myaccount'),
     path('archives/', bv.archives, name='archives'),
-    path('feed.json', bv.json_feed, name='feed')
+    path('feed.json', bv.json_feed, name='feed'),
+    path('search', bv.search, name='search')
 ] 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

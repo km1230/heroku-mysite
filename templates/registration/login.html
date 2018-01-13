@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'reg_base.html' %}
 {% load static %}
 
 {% block title %}
@@ -12,6 +12,10 @@ Login - {{block.super}}
 <head>
 	<meta http-equiv="refresh" content="0; url='../myaccount/'">
 </head>
+{% endif %}
+
+{% if error %}
+<span class='error'>{{error}}</span>
 {% endif %}
 
 <div class='row'>
