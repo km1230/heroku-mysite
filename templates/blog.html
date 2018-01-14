@@ -73,7 +73,7 @@
 {% endblock %}
 
 {% block sidebar %}
-<div class='card row searchbox mb-5'>
+<div class='card row searchbox mb-3'>
 	<div class='card-body bg-dark'>
 		<form method="GET" action="{% url 'search' %}" class='input-group'>
 			<input type='text' name='q' class='form-control' placeholder="Search...">
@@ -86,7 +86,7 @@
 	</div>
 </div>
 
-<div class='card row tweet'>
+<div class='card row tweet d-none d-lg-block'>
 	<div class='card-header bg-dark d-flex justify-content-center mb-0 text-white'>
 		<h4>Tweets</h4>
 	</div>

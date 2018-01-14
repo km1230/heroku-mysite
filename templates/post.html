@@ -239,7 +239,7 @@
 {% endblock %}
 
 {% block sidebar %}
-<div class='card row searchbox mb-5'>
+<div class='card row searchbox mb-3'>
 	<div class='card-body bg-dark'>
 		<form method="GET" action="{% url 'search' %}" class='input-group'>
 			<input type='text' name='q' class='form-control' placeholder="Search...">
@@ -252,7 +252,7 @@
 	</div>
 </div>
 
-<div class='card row sections mb-5'>
+<div class='card row sections d-none d-lg-block mb-3'>
 	<div class='card-header bg-dark text-white  d-flex justify-content-center mb-0'><h4>Sections</h4></div>
 	<nav class='card-body'>
 		{% for section in sections %}
@@ -261,7 +261,7 @@
 	</nav>
 </div>
 
-<div class='card row tweet'>
+<div class='card row d-none d-lg-block tweet'>
 	<div class='card-header bg-dark d-flex justify-content-center mb-0 text-white'>
 		<h4>Tweets</h4>
 	</div>

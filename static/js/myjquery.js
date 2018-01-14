@@ -36,9 +36,9 @@ $(document).ready(function(){
 	$('[data-toggle=tooltip]').tooltip();
 
 	//re-arrange col
-	if(screen.width > 960){
-			$('.sidebar').removeClass('order-first')
-		};
+	if(screen.width < 960){
+		$('.sidebar').addClass('order-first')
+	}
 	window.addEventListener('resize', ()=>{
 		if(screen.width > 960){
 			$('.sidebar').removeClass('order-first')
