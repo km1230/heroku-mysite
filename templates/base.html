@@ -82,7 +82,10 @@
             </div>
           </div>
           <a class='nav-item nav-link' href='{% url "archives" %}' id='archives'><i class='fas fa-archive'></i> Archives</a>
-          <a class='nav-item nav-link' href='{% url "feed" %}' id='archives'><i class='fas fa-rss-square'></i> Feed</a>
+          <a class='nav-item nav-link' href='{% url "feed" %}' id='archives'
+           data-toggle='tooltip' data-placement='bottom' title='JSON feed'>
+           <i class='fas fa-rss-square'></i> Feed
+         </a>
         </div>
         <div class='navbar-nav'>
           <a class="nav-item nav-link" href='{% url "login" %}' id='login'><i class='fas fa-sign-in-alt'></i> Login</a>
