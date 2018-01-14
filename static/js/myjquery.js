@@ -33,14 +33,20 @@ $(document).ready(function(){
 	$('#dob').children().addClass('col');
 
 	//enable tooltip
-	$('[data-toggle=tooltip]').tooltip();
+	var tooltip = $('[data-toggle="tooltip"]');
+	var tooltipTemplate = `<div class='tooltip'>
+							<div class='tooltip-inner bg-secondary'>
+							</div>
+							</div>`;
+	tooltip.attr('data-template',tooltipTemplate);
+	tooltip.tooltip();
 
 	//re-arrange col
-	if(screen.width < 960){
+	if($(document).width() < 992){
 		$('.sidebar').addClass('order-first')
 	}
 	window.addEventListener('resize', ()=>{
-		if(screen.width > 960){
+		if($(document).width() > 992){
 			$('.sidebar').removeClass('order-first')
 		} else {
 			$('.sidebar').addClass('order-first')

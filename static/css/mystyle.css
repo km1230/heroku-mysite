@@ -6,12 +6,6 @@ body {
 	height: 30px;
 }
 
-.helptext {
-    color: #b5b5b5; 
-    font-size: 0.75em;
-    font-family: Courier;
-}
-
 .error {
     color: #d02c2c;
     font-size: 2rem;
@@ -35,10 +29,17 @@ body {
 
 .share {
     font-size:1.5rem;
-    transition: 0.5s;
+    cursor: pointer;
 }
 
-.share a:hover {font-size: 2rem;}
+@keyframes rotation {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+.share svg:hover {
+    animation: rotation 1.5s infinite;
+}
 
 .card{
     flex-wrap: nowrap;

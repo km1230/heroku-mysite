@@ -110,7 +110,6 @@
 				<div id='editor' class='form-control'></div>
 			</div>
 			<div class='modal-footer bg-light'>
-				<button class='btn btn-warning d-none' type='button' id='htmlEscape' data-toggle='tooltip' data-placement='left' title='Click to escape HTML before submitting this snippet'>Escape Html</button>
 				<button class='btn btn-secondary' data-dismiss='modal'>Cancel</button>
 				<button class='btn btn-primary' type='button' id='snippetButton' data-dismiss='modal'>Insert Snippet</button>
 			</div>
@@ -128,7 +127,7 @@
 		</div>
 
 		<div class='row'>
-			<div class='col-12 col-lg-10 d-inline mb-3 tag'>
+			<div class='col-12 col-lg-9 d-inline mb-3 tag'>
 				{% for tag in post.tag %}
 			    {% if tag == 'Python3.6' %}
 			        <a href="{% url 'post_tag' key=tag %}" class='tag'><img src='https://img.shields.io/badge/Script-Python3.6-blue.svg'></img></a>
@@ -150,9 +149,11 @@
 			    {% endfor %}
 			</div>
 
-			<div class='col-12 col-lg-2 d-inline mb-3 share'>
-				<a href="https://twitter.com/share?text={{post.title}}"><i class='fab fa-twitter' data-fa-transform='shrink-5' data-fa-mask='fas fa-circle' style='color: #1DA1F2'></i></a>
-				<a href='https://www.facebook.com/dialog/share?app_id=388159358278841&display=popup&href=http://devjunior.com{% url "page" key=post.pk %}'><i class="fab fa-facebook-f" data-fa-transform="shrink-3.5 down-1.6 right-1.25" data-fa-mask="fas fa-circle" style='color: #4267b2'></i></a>
+			<div class='col-12 col-lg-3 d-inline mb-3 share'>
+				<a href="https://www.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark" data-pin-custom='true'><i class='fab fa-pinterest' style='color: #AA2529'></i></a>
+				<a href="https://twitter.com/share?text={{post.title}}" target='_blank'><i class='fab fa-twitter' data-fa-transform='shrink-5' data-fa-mask='fas fa-circle' style='color: #1DA1F2'></i></a>
+				<a href='https://www.facebook.com/dialog/share?app_id=388159358278841&display=popup&href=http://devjunior.com{% url "page" key=post.pk %}' target='_blank'><i class="fab fa-facebook-f" data-fa-transform="shrink-3.5 down-1.6 right-1.25" data-fa-mask="fas fa-circle" style='color: #4267b2'></i></a>
+				<a href="https://plus.google.com/share?url=http://devjunior.com/{% url 'page' key=post.pk %}" target='_blank'><i class='fab fa-google-plus' style='color: #FFC107'></i></a>
 			</div>
 		</div>
 
@@ -261,7 +262,7 @@
 	</nav>
 </div>
 
-<div class='card row d-none d-lg-block tweet'>
+<div class='card row d-none d-lg-block tweet mb-3'>
 	<div class='card-header bg-dark d-flex justify-content-center mb-0 text-white'>
 		<h4>Tweets</h4>
 	</div>
@@ -273,5 +274,18 @@
 		href="https://twitter.com/moklavie?ref_src=twsrc%5Etfw"></a>
 	</div>
 </div>
- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<div class='card row pin d-none d-lg-block'>
+	<div class='card-header bg-dark text-white d-flex justify-content-center mb-0'>
+		<h4>Pinterest</h4>
+	</div>
+	<div class='card-body p-0'>
+		<a data-pin-do="embedBoard"
+		data-pin-board-width=auto
+		data-pin-scale-height=auto
+		href="https://www.pinterest.com/moklavie/it-programming/"></a>
+	</div>
+</div>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
 {% endblock %}

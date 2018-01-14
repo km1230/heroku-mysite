@@ -12,7 +12,7 @@ $(document).ready(function(){
 	//line
 	$('#line').click(function(){
 		var temp = $('#id_content').val();
-		$('#id_content').val(temp + "\n`line`\n\n");
+		$('#id_content').val(temp + "\n`line`\n");
 	})
 
 	//url
@@ -61,21 +61,6 @@ $(document).ready(function(){
 	    	var lang = this.value;
 	    	var mode = 'ace/mode/' + lang;
 	    	editor.getSession().setMode(mode);
-	    	if(lang =='html'){
-	    		$('#htmlEscape').toggleClass('d-none');
-	    		$('#htmlEscape').toggleClass('d-inline-block');
-    			$('#htmlEscape').click(function(){
-    				editor.findAll('<');
-    				editor.replaceAll('&lt;');
-    				editor.findAll('>');
-    				editor.replaceAll('&gt;');
-    			});
-    		} else {
-    			$('#htmlEscape').removeClass('d-inline-block');
-    			if($('#htmlEscape').hasClass('d-none') == false){
-    				$('#htmlEscape').addClass('d-none')
-    			}
-    		};
     	};
     	
     	langSelect.addEventListener('change', setLang);
