@@ -20198,7 +20198,7 @@ require("./keyboard/hash_handler");
 require("./placeholder");
 require("./multi_select");
 require("./mode/folding/fold_mode");
-require("./theme/textmate");
+require("./ace/theme/textmate");
 require("./ext/error_marker");
 
 exports.config = require("./config");

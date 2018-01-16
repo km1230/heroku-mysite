@@ -51,6 +51,9 @@ $(document).ready(function(){
 	//snippet
 	$('#snippet').click(function(){
 		var editor = ace.edit('editor');
+		ace.config.set('basePath', 'http://www.devjunior.com/static/js/ace/src-noconflict');
+		ace.config.set('modePath', 'http://www.devjunior.com/static/js/ace/src-noconflict');
+		ace.config.set('themePath', 'http://www.devjunior.com/static/js/ace/src-noconflict');
 		var langSelect = document.getElementById('lang');
     	var snippetButton = document.getElementById('snippetButton')
     	editor.setTheme("ace/theme/clouds");
