@@ -75,5 +75,9 @@ $(document).ready(function(){
 		var code = editor.getValue();
 		$('#id_content').val(temp + '\n`snippet`\n' + code + '\n`endsnippet`\n');
 	});
-	
+
+	//delete
+	$('#delete').click(function(){
+		$('#deleteModal').modal('show');
+	})	
 })

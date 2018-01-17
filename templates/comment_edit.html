@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-Post New - {{ block.super }}
+Edit Post - {{ block.super }}
 {% endblock %}
 
 {% block content %}
@@ -120,10 +120,29 @@ Post New - {{ block.super }}
 	</div>
 </div>
 
+<div class='modal' id='deleteModal'>
+	<div class='modal-dialog'>
+		<div class='modal-content'>
+			<div class='modal-body bg-danger text-white'>
+				<h4>
+					<p>You are going to delete this post.</p>
+					<p>Are you sure?</p>
+				</h4>
+			</div>
+			<div class='modal-footer'>
+				<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>
+				<a href='{% url "comment_delete" key=comment.pk %}'>
+					<button type='button' class='btn btn-danger'>Delete</button>
+				</a>
+			</div>
+		</div>
+	</div>	
+</div>
+
 <div class='row'>
 	<div class='col-12'>
 		<div class='card'>
-			<div class='card-header d-flex justify-content-center bg-dark text-white'><h1>Post New</h1></div>
+			<div class='card-header d-flex justify-content-center bg-dark text-white'><h1>Edit Comment</h1></div>
 			<form method='POST'>
 				{% csrf_token %}
 				<div class='card-body'>
@@ -153,8 +172,15 @@ Post New - {{ block.super }}
 					</div>
 					{% endfor %}
 				</div>
-				<div class='card-footer d-flex justify-content-center'>
-					<button type='submit' class='btn btn-info btn-block'>Post</button>
+				<div class='card-footer'>
+					<div class='row'>
+						<div class='col-12 mb-2'>
+							<button type='submit' class='btn btn-info btn-block'>Update Post</button>
+						</div>
+						<div class='col-12'>
+							<button type='button' class='btn btn-danger btn-block' id='delete'>Delete Post</button>
+						</div>
+					</div>
 				</div>
 			</form>
 		</div>

@@ -1,0 +1,28 @@
+{% extends 'reg_base.html' %}
+{% block title %}
+Delete Done - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<head>
+	<meta http-equiv="refresh" content="5; url={% url 'blog' %}">
+</head>
+
+<div class='card row'>
+	<div class='card-body col-12 text-success'>
+		<p><h2>Deleted</h2></p>
+		<p>Your thread is deleted successfully.</p>
+		<p class='text-dark'>You are redirecting to Home...<span id='countdown'></span></p>
+	</div>
+</div>
+
+<script>
+	let countdown = 5;
+	setInterval(function(){
+		document.querySelector('#countdown').innerHTML = countdown + 's';
+		countdown --;
+		console.log(countdown);
+	},1000);
+</script>
+
+{% endblock %}

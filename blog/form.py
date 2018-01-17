@@ -47,14 +47,16 @@ class CommentForm(forms.ModelForm):
 		data = self.cleaned_data['content']+'\n'
 		lines = data.split('\n')
 		newLines = []
+		brackets = {'<': '&lt;', '>': '&gt;'}
 		tags = {'`kbd`': '<code>', '`endkbd`': '</code>',
 				'`bold`': '<b>', '`endbold`': '</b>', 
 				'`line`': '<hr>', '`url`': '<a href="', 
 				'`midurl`': '" target="_blank">', '`endurl`': '</a>', 
 				'`img`': '<img src="', '`endimg`': '" class="img-thumbnail">', 
-				'`snippet`': '<pre class="prettyprint">', '`endsnippet`': '</pre>',
-				'<': '&lt;', '>': '&gt;'}
+				'`snippet`': '<pre class="prettyprint">', '`endsnippet`': '</pre>'}
 		for l in lines:
+			for b in brackets:
+				l = re.sub(b, brackets[b], l)
 			for t in tags:
 				l = re.sub(t, tags[t], l)
 			newLines.append(l)

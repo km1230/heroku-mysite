@@ -1,9 +1,10 @@
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from multiselectfield import MultiSelectField
 from django.template.defaultfilters import truncatewords
+from multiselectfield import MultiSelectField
 
 """
 Post Model
@@ -14,7 +15,8 @@ class Post(models.Model):
 	author = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
 	photo = models.URLField(null=True, blank=True)
 	photo_upload = models.ImageField(null=True, blank=True)
-	time = models.DateTimeField(auto_now_add=True)
+	create_time = models.DateTimeField(auto_now_add=True)
+	edit_time = models.DateTimeField(null=True, blank=True, auto_now=True)
 	tag = MultiSelectField(null=True, blank=True, choices=(
 		('Python3.6','Python3.6'),		
 		('Django2.0', 'Django2.0'),
@@ -37,10 +39,11 @@ class Comment(models.Model):
 	parent_post = models.ForeignKey(Post, on_delete=models.CASCADE)
 	author = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
 	content = models.TextField()
-	time = models.DateTimeField(auto_now_add=True)
+	create_time = models.DateTimeField(auto_now_add=True)
+	edit_time = models.DateTimeField(null=True, blank=True, auto_now=True)
 
 	def __str__(self):
-		return '%s %s %s' % (self.parent_post, self.author, self.time)
+		return '%s %s %s' % (self.parent_post, self.author, self.edit_time)
 
 	@property
 	def short_content(self):

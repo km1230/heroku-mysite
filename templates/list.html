@@ -6,16 +6,16 @@ Archives - {{ block.super }}
 {% block content %}
 
 <div class='card row'>
+	{% if error %}
+	<div class='d-flex justify-content-center col-12'>
+		<span class='error'>{{ error }}</span>
+	</div>
+	{% endif %}
 	<div class='card-body col-12'>
-		{% if error %}
-		<div class='d-flex justify-content-center col-12'>
-			<span class='error'>{{ error }}</span>
-		</div>
-		{% endif %}
 		{% for post in posts %}
 		<div class='col-12 col-lg-3'>{{ post.create_time|date:"Y - m -d" }}</div>
 		<div class='col-12 col-lg-9'>
-			<a href='{% url "page" key=post.pk %}'>{{post.title}}</a>
+			<a href='{% url "post_edit" key=post.pk %}'>{{post.title}}</a>
 		</div>
 		{% endfor %}
 	</div>

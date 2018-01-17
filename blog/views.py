@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.http import HttpResponseRedirect
 from django.db.models import Q
 from .models import Post, Comment
 from .form import PostForm, CommentForm, Registration, UserAccount, UserProfile
@@ -18,7 +19,7 @@ import re
 Font page of blog
 """
 def blogindex(request):
-	post_list = Post.objects.all().order_by('-time')
+	post_list = Post.objects.all().order_by('-create_time')
 	for post in post_list:
 		post.title = '🔖 ' + post.title
 	p = Paginator(post_list, 5)
@@ -27,7 +28,7 @@ def blogindex(request):
 	return render(request, 'blog.html', {'posts': posts})
 
 def post_tag(request, key):
-	post_list = [p for p in Post.objects.all().order_by('-time') if key in p.tag]
+	post_list = [p for p in Post.objects.all().order_by('-create_time') if key in p.tag]
 	for post in post_list:
 		post.title = '🔖 ' + post.title
 	p = Paginator(post_list, 5)
@@ -42,7 +43,7 @@ def search(request):
 		posts = Post.objects.filter(
 					        Q(title__icontains=query) |
 					        Q(content__icontains=query)
-				        ).order_by('-time')
+				        ).order_by('-create_time')
 	if len(posts) < 1:
 		error = 'Sorry No result :('
 	return render(request, 'archives.html', {'posts':posts, 'error':error})
@@ -183,7 +184,7 @@ def post_page(request, key):
 			form = CommentForm()
 	else:
 		form = ''
-	comment = Comment.objects.filter(parent_post=post).order_by('time')
+	comment = Comment.objects.filter(parent_post=post).order_by('create_time')
 	return render(request, 'post.html', {'post': post, 'comment': comment, 'form':form, 'error':error, 'sections':sections})
 
 
@@ -191,7 +192,7 @@ def post_page(request, key):
 Archives
 """
 def archives(request):
-	post_list = Post.objects.order_by('-time')
+	post_list = Post.objects.order_by('-create_time')
 	p = Paginator(post_list, 20)
 	page = request.GET.get('page')
 	posts = p.get_page(page)
@@ -221,6 +222,110 @@ def post_new(request):
 	else:
 		postform = PostForm()
 	return render(request, 'post_new.html', {'form':postform})
+
+"""
+List all Post by author
+"""
+def edit_list(request):
+	if request.user.is_authenticated:
+		post_list = Post.objects.filter(author=request.user).order_by('-create_time')
+		error = ''
+		if post_list:
+			p = Paginator(post_list, 20)
+			page = request.GET.get('page')
+			posts = p.get_page(page)
+		else: 
+			error = 'You have no threads.'
+	else:
+		return blogindex(request)
+	return render (request, 'list.html', {'posts':posts, 'error':error})
+
+"""
+Edit Post
+"""
+def post_edit(request, key):
+	post = Post.objects.get(pk=key)
+	if request.user != User.objects.get(username='admin'):
+		return blogindex(request)
+
+	if request.method == "POST":
+		temp = PostForm(request.POST, instance=post)
+		if temp.is_valid():
+			content = temp.change_content()
+			form = temp.save(commit=False)
+			form.content = content
+			form.save()
+			url = reverse('page', kwargs={'key':key})
+			return render(request, 'edit_done.html', {'url': url})
+		else:
+			form = PostForm(instance=post)
+
+	else:
+		form = PostForm(instance=post)
+	return render(request, 'post_edit.html', {'form':form, 'post':post})
+
+
+"""
+Delete Post
+"""
+def post_delete(request, key):
+	post = Post.objects.get(pk=key)
+	post.delete()
+	return render(request, 'delete_done.html')
+
+
+"""
+List all Comments by author
+"""
+def comment_list(request):
+	if request.user.is_authenticated:
+		comment_list = Comment.objects.filter(author=request.user).order_by('-edit_time')
+		error = ''
+		if comment_list:
+			p = Paginator(comment_list, 20)
+			page = request.GET.get('page')
+			comments = p.get_page(page)
+		else: 
+			error = 'You have no threads.'
+	else:
+		return blogindex(request)
+	return render (request, 'comment_list.html', {'comments':comments, 'error':error})
+
+"""
+Edit Comment
+"""
+def comment_edit(request, key):
+	comment = Comment.objects.get(pk=key)
+	parent = comment.parent_post
+	if comment.author != request.user :
+		return comment_list(request)
+
+	if request.method == "POST":
+		temp = CommentForm(request.POST, instance=comment)
+		if temp.is_valid():
+			content = temp.change_content()
+			form = temp.save(commit=False)
+			form.content = content
+			form.save()
+			url = reverse('page', kwargs={'key':parent.pk})
+			return render(request, 'edit_done.html', {'url': url})
+		else:
+			form = CommentForm(instance=comment)
+
+	else:
+		form = CommentForm(instance=comment)
+	return render(request, 'comment_edit.html', {'form':form, 'comment':comment})
+
+
+"""
+Delete Post
+"""
+def comment_delete(request, key):
+	comment = Comment.objects.get(pk=key)
+	comment.delete()
+	return render(request, 'delete_done.html')
+
+
 
 """
 Sending Email
@@ -259,7 +364,7 @@ def json_feed(request):
 	    "favicon": "http://www.devjunior.com/static/img/favicon.ef83680e7b40.png",
 	    "items": []
 	}
-	posts = Post.objects.order_by('-time')
+	posts = Post.objects.order_by('-create_time')
 	for post in posts:
 		post_dict = {}
 		post_dict['id'] = str(post.pk)

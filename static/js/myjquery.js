@@ -9,6 +9,8 @@ $(document).ready(function(){
 		$('#archives').addClass('active')
 	} else if(current.search('myaccount/') >= 0) {
 		$('#myaccount').addClass('active')
+	} else if(current.search('edit') >= 0){
+		$('#postedit').addClass('active')
 	} else if(current.search('post/') >= 0){
 		$('#postnew').addClass('active')
 	} else if(current.search('register') >= 0){

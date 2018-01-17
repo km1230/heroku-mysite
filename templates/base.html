@@ -27,73 +27,7 @@
   </head>
   <body onload="PR.prettyPrint()">    
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href='{% url "blog" %}'><img src='{% static "img/favicon.png" %}' style='width:30px; height:30px'></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="menu">
-        {% if request.user.is_authenticated %}
-        <div class='navbar-nav mr-auto'>
-          <a class="nav-item nav-link" href='{% url "blog" %}' id='home'><i class="fas fa-home"></i> Home</a>
-          <div class='nav-item dropdown'>
-            <a class='nav-link dropdown-toggle' href='#' data-toggle='dropdown' id='categories'><i class='fas fa-sitemap'></i> Categories</a>
-            <div class='dropdown-menu'>
-              <a class='dropdown-item' href='{% url "post_tag" key="Font-end" %}'>Font-end</a>
-              <a class='dropdown-item' href='{% url "post_tag" key="Back-end" %}'>Back-end</a>
-              <div class='dropdown-divider'></div>
-              <a class='dropdown-item' href='{% url "post_tag" key="Bootstrap" %}'>Bootstrap</a>
-              <a class='dropdown-item' href='{% url "post_tag" key="CSS" %}'>CSS</a>
-              <a class='dropdown-item' href='{% url "post_tag" key="Django2.0" %}'>Django</a>
-              <a class='dropdown-item' href='{% url "post_tag" key="Javascript" %}'>Javascript</a>
-              <a class='dropdown-item' href='{% url "post_tag" key="Nodejs" %}' style='display: none'>Nodejs</a>
-              <a class='dropdown-item' href='{% url "post_tag" key="Python3.6" %}'>Python</a>
-            </div>
-          </div>
-          <a class='nav-item nav-link' href='{% url "archives" %}' id='archives'><i class='fas fa-archive'></i> Archives</a>
-          <a class='nav-item nav-link' href='{% url "feed" %}' id='archives' 
-              data-toggle='tooltip' data-placement='bottom' title='JSON feed'>
-            <i class='fas fa-rss-square'></i> Feed
-          </a>
-          <a class="nav-item nav-link" href='{% url "myaccount" %}' id='myaccount'><i class='fas fa-user'></i> MyAccount</a>
-          {% if request.user.email == 'moklavie@gmail.com' %}
-          <a class="nav-item nav-link" href='{% url "admin:index" %}' id='admin'><i class='fas fa-suitcase'></i> Admin</a>
-          <a class="nav-item nav-link" href='{% url "post_new" %}' id='postnew'><i class='fas fa-edit'></i> PostNew</a>
-          {% endif %}
-        </div>
-        <div class='navbar-nav'>
-          <a class="nav-item nav-link" href='{% url "logout" %}'><i class='fas fa-sign-out-alt'></i> Logout</a>
-        </div>
-        {% else %}
-        <div class='navbar-nav mr-auto'>
-          <a class="nav-item nav-link" href='{% url "blog" %}' id='home'><i class="fas fa-home"></i> Home</a>
-          <div class='nav-item dropdown'>
-            <a class='nav-link dropdown-toggle' href='#' data-toggle='dropdown' id='categories'><i class='fas fa-sitemap'></i> Categories</a>
-            <div class='dropdown-menu'>
-              <a class='dropdown-item' href='{% url "post_tag" key="Font-end" %}'>Font-end</a>
-              <a class='dropdown-item' href='{% url "post_tag" key="Back-end" %}'>Back-end</a>
-              <div class='dropdown-divider'></div>
-              <a class='dropdown-item' href='{% url "post_tag" key="Bootstrap" %}'>Bootstrap</a>
-              <a class='dropdown-item' href='{% url "post_tag" key="CSS" %}'>CSS</a>
-              <a class='dropdown-item' href='{% url "post_tag" key="Django2.0" %}'>Django</a>
-              <a class='dropdown-item' href='{% url "post_tag" key="Javascript" %}'>Javascript</a>
-              <a class='dropdown-item' href='{% url "post_tag" key="Nodejs" %}' style='display: none'>Nodejs</a>
-              <a class='dropdown-item' href='{% url "post_tag" key="Python3.6" %}'>Python</a>
-            </div>
-          </div>
-          <a class='nav-item nav-link' href='{% url "archives" %}' id='archives'><i class='fas fa-archive'></i> Archives</a>
-          <a class='nav-item nav-link' href='{% url "feed" %}' id='archives'
-           data-toggle='tooltip' data-placement='bottom' title='JSON feed'>
-           <i class='fas fa-rss-square'></i> Feed
-         </a>
-        </div>
-        <div class='navbar-nav'>
-          <a class="nav-item nav-link" href='{% url "login" %}' id='login'><i class='fas fa-sign-in-alt'></i> Login</a>
-          <a class="nav-item nav-link" href='{% url "register" %}' id='signup'><i class='fas fa-pencil-alt'></i> SignUp</a>
-        </div>
-        {% endif %}
-      </div>
-    </nav>
+    {% include 'nav.html' %}
       
     <div class='container'>
       <div class='rowspace'></div>

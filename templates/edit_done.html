@@ -1,0 +1,28 @@
+{% extends 'reg_base.html' %}
+{% block title %}
+Edit Done - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<head>
+	<meta http-equiv="refresh" content="5; url={{ url }}">
+</head>
+
+<div class='card row'>
+	<div class='card-body col-12 text-success'>
+		<p><h2>Posted</h2></p>
+		<p>Your thread is updated successfully.</p>
+		<p class='text-dark'>You are redirecting to the post...<span id='countdown'></span></p>
+	</div>
+</div>
+
+<script>
+	let countdown = 5;
+	setInterval(function(){
+		document.querySelector('#countdown').innerHTML = countdown + 's';
+		countdown --;
+		console.log(countdown);
+	},1000);
+</script>
+
+{% endblock %}

@@ -123,7 +123,7 @@
 
     <div class='card-body pt-0'>
 	    <div class='col-12 mb-3 pl-0'>
-			<div class="date">{{ post.time|date:"Y - m - d" }}</div>
+			<div class="date">{{ post.edit_time|date:"Y - m - d" }}</div>
 		</div>
 
 		<div class='row'>
@@ -167,6 +167,17 @@
 	    
 	    <div class='col-12 content mb-4'>{{ post.content | safe}}</div>
 	</div>
+	{% if request.user.username == 'admin' %}
+	<div class='card-footer'>
+		<div class='row'>
+			<div class='col-12'>
+				<a href='{% url "post_edit" key=post.pk %}' style='text-decoration: none'>
+					<button type='button' class='btn btn-warning btn-block text-white'>Edit Post</button>
+				</a>
+			</div>
+		</div>
+	</div>
+	{% endif %}
 </div>
 
 <hr>
@@ -185,7 +196,14 @@
 			{% endif %}
 		</dt>
 		<dd class='col-12 col-lg-9 comment_content'>{{ c.content | safe }}</dd>
-		<dd class='col-4 offset-8 d-flex helptext justify-content-end'>{{ c.time }}</dd>
+		<dd class='col-12 d-flex helptext justify-content-end'>{{ c.edit_time }}</dd>
+		{% if c.author == request.user %}
+		<dd class='col-12 d-flex helptext justify-content-end'>
+			<a href='{% url "comment_edit" key=c.pk %}'>
+				<button type='button' class='btn btn-sm btn-warning text-white'>Edit</button>
+			</a>
+		</dd>
+		{% endif %}
 		{% endfor %}
 		{% else %}
 		<div class='col-12 d-flex justify-content-center helptext'>There is no comment yet</div>
