@@ -16,22 +16,36 @@ class PostForm(forms.ModelForm):
 		model = Post
 		fields = ('title', 'content', 'photo', 'photo_upload','tag')  #which fields are being used in the form
 
-	def change_content(self):
+	#saving decrypted content to database
+	def decrypt_content(self):
 		data = self.cleaned_data['content']+'\n'
 		lines = data.split('\n')
 		newLines = []
-		tags = {'`kbd`': '<code>', '`endkbd`': '</code>',
-				'`bold`': '<b>', '`endbold`': '</b>', 
-				'`line`': '<hr>', '`url`': '<a href="', 
-				'`midurl`': '" target="_blank">', '`endurl`': '</a>', 
-				'`img`': '<img src="', '`endimg`': '" class="img-thumbnail">', 
-				'`snippet`': '<pre class="prettyprint">', '`endsnippet`': '</pre>'}
+		tags = {r'\[kbd\]': '<code>', r'\[/kbd\]': '</code>',
+				r'\[b\]': '<b>', r'\[/b\]': '</b>', 
+				r'\[line\]': '<hr>', 
+				r'\[img\]': '<img src="', r'\[/img\]': '" class="img-thumbnail">', 
+				r'\[snippet\]': '<pre class="prettyprint">', r'\[/snippet\]': '</pre>'}
 		for l in lines:
 			for t in tags:
 				l = re.sub(t, tags[t], l)
+
+			parts = l.split('[/url]')
+			if '' in parts:
+				parts.remove('')
+			for i in range(len(parts)):
+				if '[url]' in parts[i]:
+					part = parts[i].split('[url]')
+					if len(part) > 1:
+						address = part[1]
+						parts[i] = part[0] + '<a href="' + address + '" target="_blank">' + address + '</a>'
+					else:
+						parts[i] = '<a href="' + part[0] + '" target="_blank">' + part[0] + '</a>'
+			l = ''.join(parts)
 			newLines.append(l)
 		newData = '\n'.join(newLines)
 		return newData
+
 
 """
 CommentForm
@@ -43,22 +57,36 @@ class CommentForm(forms.ModelForm):
 		model = Comment
 		fields = ('content',)
 
-	def change_content(self):
+	def decrypt_content(self):
 		data = self.cleaned_data['content']+'\n'
 		lines = data.split('\n')
 		newLines = []
-		brackets = {'<': '&lt;', '>': '&gt;'}
-		tags = {'`kbd`': '<code>', '`endkbd`': '</code>',
-				'`bold`': '<b>', '`endbold`': '</b>', 
-				'`line`': '<hr>', '`url`': '<a href="', 
-				'`midurl`': '" target="_blank">', '`endurl`': '</a>', 
-				'`img`': '<img src="', '`endimg`': '" class="img-thumbnail">', 
-				'`snippet`': '<pre class="prettyprint">', '`endsnippet`': '</pre>'}
+		brackets = {'<': '&lt;', '>': '&gt;', r'(?i)javascript':'J-A-V-A-S-C-R-I-P-T'}
+		tags = {r'\[kbd\]': '<code>', r'\[/kbd\]': '</code>',
+				r'\[b\]': '<b>', r'\[/b\]': '</b>', 
+				r'\[line\]': '<hr>', 
+				r'\[img\]': '<img src="', r'\[/img\]': '" class="img-thumbnail">', 
+				r'\[snippet\]': '<pre class="prettyprint">', r'\[/snippet\]': '</pre>'}
 		for l in lines:
 			for b in brackets:
 				l = re.sub(b, brackets[b], l)
 			for t in tags:
 				l = re.sub(t, tags[t], l)
+
+			parts = l.split('[/url]')
+			if '' in parts:
+				parts.remove('')
+			print(parts)
+			for i in range(len(parts)):
+				if '[url]' in parts[i]:
+					part = parts[i].split('[url]')
+					if len(part) > 1:
+						address = part[1]
+						parts[i] = part[0] + '<a href="' + address + '" target="_blank">' + address + '</a>'
+					else:
+						parts[i] = '<a href="' + part[0] + '" target="_blank">' + part[0] + '</a>'
+			
+			l = ''.join(parts)
 			newLines.append(l)
 		newData = '\n'.join(newLines)
 		return newData

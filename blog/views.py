@@ -169,10 +169,9 @@ def post_page(request, key):
 		if request.method == "POST":
 			temp = CommentForm(request.POST)
 			if temp.is_valid():
-				content = temp.change_content()
+				content = temp.decrypt_content()
 				form = temp.save(commit=False)
 				form.content = content
-				print('form.content: '+form.content)
 				form.parent_post = post
 				form.author = request.user
 				form.save()
@@ -210,7 +209,7 @@ def post_new(request):
 	if request.method == "POST":
 		temp = PostForm(request.POST)     #request.POST to collect data from forms
 		if temp.is_valid():
-			content = temp.change_content()
+			content = temp.decrypt_content()
 			postform = temp.save(commit=False)
 			postform.content = content
 			postform.author = User.objects.get(username='admin')
@@ -241,6 +240,30 @@ def edit_list(request):
 	return render (request, 'list.html', {'posts':posts, 'error':error})
 
 """
+Encrypt Content
+"""
+def encrypt_content(target):
+	content = target.content
+	newLines=[]
+	brackets = {'&lt;': '<', '&gt;': '>', 'J-A-V-A-S-C-R-I-P-T':'javascript'}
+	tags = {'<code>':'[kbd]', '</code>':'[/kbd]',
+			'<b>':'[b]', '</b>':'[/b]', 
+			'<hr>':'[line]', 
+			r'<a href=".*?blank">': '[url]', '</a>':'[/url]',
+			'<img src="':'[img', '" class="img-thumbnail">':'[/img]', 
+			'<pre class="prettyprint">':'[snippet]', '</pre>':'[/snippet]'}
+	lines = content.split('\n')
+	for l in lines:
+		for b in brackets:
+			l = re.sub(b, brackets[b], l)
+		for t in tags:
+			l = re.sub(t, tags[t], l)
+		newLines.append(l)
+	newData = '\n'.join(newLines)
+	return newData
+
+
+"""
 Edit Post
 """
 def post_edit(request, key):
@@ -251,17 +274,19 @@ def post_edit(request, key):
 	if request.method == "POST":
 		temp = PostForm(request.POST, instance=post)
 		if temp.is_valid():
-			content = temp.change_content()
+			content = temp.decrypt_content()
 			form = temp.save(commit=False)
 			form.content = content
 			form.save()
 			url = reverse('page', kwargs={'key':key})
 			return render(request, 'edit_done.html', {'url': url})
 		else:
-			form = PostForm(instance=post)
+			content = encrypt_content(post);
+			form = PostForm(initial={'content':content}, instance=post)
 
 	else:
-		form = PostForm(instance=post)
+		content = encrypt_content(post);
+		form = PostForm(initial={'content':content}, instance=post)
 	return render(request, 'post_edit.html', {'form':form, 'post':post})
 
 
@@ -303,17 +328,19 @@ def comment_edit(request, key):
 	if request.method == "POST":
 		temp = CommentForm(request.POST, instance=comment)
 		if temp.is_valid():
-			content = temp.change_content()
+			content = temp.decrypt_content()
 			form = temp.save(commit=False)
 			form.content = content
 			form.save()
 			url = reverse('page', kwargs={'key':parent.pk})
 			return render(request, 'edit_done.html', {'url': url})
 		else:
-			form = CommentForm(instance=comment)
+			content = encrypt_content(comment)
+			form = CommentForm(initial={'content':content}, instance=comment)
 
 	else:
-		form = CommentForm(instance=comment)
+		content = encrypt_content(comment)
+		form = CommentForm(initial={'content':content}, instance=comment)
 	return render(request, 'comment_edit.html', {'form':form, 'comment':comment})
 
 

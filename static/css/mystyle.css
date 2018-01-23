@@ -192,15 +192,16 @@ a.read_more:hover {
 }
 
 .comment_author{
-    border: #268484 solid 1px
-    border-radius: 5px;
-    padding: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+    white-space: pre-line;
 }
 
 .comment_content{
     border: #5b5b5b solid 1px;
     border-radius: 5px;
     padding: 10px;
+    white-space: pre-line;
 }
 
 .footer_contact ul{
