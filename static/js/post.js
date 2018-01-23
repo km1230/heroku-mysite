@@ -64,9 +64,27 @@ $('#snippet').click(function(){
 	function setLang(){
     	let lang = this.value;
     	editor.getSession().setMode('ace/mode/'+lang);
+    	if(lang=='html'){
+    		$('#htmlEscape').removeClass('d-none');
+    		$('#htmlEscape').click(function(){
+    			let temp = editor.getValue();
+    			tempList = temp.split('\n');
+    			let newTemp = [];
+    			let line;
+    			for(i=0;i<tempList.length;i++){
+	    			tempList[i] = tempList[i].replace(/</g, '&lt;');
+	    			tempList[i] = tempList[i].replace(/>/g, '&gt;');
+	    			newTemp.push(tempList[i]);
+    			};
+    			editor.setValue(newTemp.join('\n'));
+    		});
+    	} else {
+    		$('#htmlEscape').addClass('d-none');
+    	};
 	};
 	
 	langSelect.addEventListener('change', setLang);
+
 });
 
 $('#snippetButton').click(function(){

@@ -281,12 +281,10 @@ def post_edit(request, key):
 			url = reverse('page', kwargs={'key':key})
 			return render(request, 'edit_done.html', {'url': url})
 		else:
-			content = encrypt_content(post);
-			form = PostForm(initial={'content':content}, instance=post)
+			form = PostForm(instance=post)
 
 	else:
-		content = encrypt_content(post);
-		form = PostForm(initial={'content':content}, instance=post)
+		form = PostForm(instance=post)
 	return render(request, 'post_edit.html', {'form':form, 'post':post})
 
 
