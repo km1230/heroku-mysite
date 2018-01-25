@@ -50,39 +50,7 @@
       <div class='rowspace'></div>
 
       <div class='row'>
-        <div class='col-12 bg-dark text-secondary footer'>
-          <div class='row'>
-            <div class='col-12 col-lg-4 m-2 footer_aboutme'>
-              <h4>About Me</h4>
-              <div class='media'>
-                <img src='{% static "img/rayban.jpg" %}' class='img-fluid m-2' style='width: 64px; height: 64px;'>
-                <div class='media-body align-bottom'>
-                  <p>
-                    Kavie. A registered optometrist from HK. Currently an ICT student of UTAS. 
-                    Have a passion in webdev and machine learning.<br>
-                    This site is built in Python &amp; Django framework, JS &amp; jQuery &amp; Bootstrap.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class='col-12 col-lg-4'></div>
-            <div class='col-12 col-lg m-2 media footer_contact'>
-              <div class='media-body'>
-                <h4>Contact</h4>
-                <h6>Social Networks</h6>
-                <div class='fa-2x'>
-                  <a href='https://www.pinterest.com/moklavie/it-programming' target='_blank'><i class='fab fa-pinterest m-2'></i></a>
-                  <a href='https://twitter.com/moklavie' target='_blank'><i class="fab fa-twitter m-2" data-fa-transform='shrink-3' data-fa-mask='fas fa-circle'></i></a>
-                  <a href='https://www.facebook.com/mokavie' target='_blank'><i class="fab fa-facebook-f m-2" data-fa-transform="shrink-3.5 down-1.6 right-1.25" data-fa-mask="fas fa-circle"></i></a>
-                  <a href='https://github.com/km1230' target='_blank'><i class="fab fa-github m-2"></i></a>
-                  <a href='https://www.instagram.com/kaviemo' target='_blank'><i class='fab fa-instagram m-2' data-fa-transform='shrink-3' data-fa-mask='fas fa-circle'></i></a>
-                </div>
-                <h6>Email</h6>
-                <span><i class='fas fa-envelope m-2 align-middle'></i><a href='mailto:moklavie@gmail.com'>moklavie@gmail.com</a></span>
-              </div>
-            </div>
-          </div>
-        </div>
+        {% include 'footer.html' %}
       </div>
     </div>
     <!-- Optional JavaScript -->

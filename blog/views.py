@@ -302,9 +302,11 @@ List all Comments by author
 """
 def comment_list(request):
 	if request.user.is_authenticated:
-		comment_list = Comment.objects.filter(author=request.user).order_by('-edit_time')
+		comment_list = Comment.objects.filter(author=request.user)
 		error = ''
+		comments = ''
 		if comment_list:
+			comment_list = comment_list.order_by('-edit_time')
 			p = Paginator(comment_list, 20)
 			page = request.GET.get('page')
 			comments = p.get_page(page)

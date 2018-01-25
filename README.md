@@ -1,6 +1,6 @@
 <p align='center'><img src='https://github.com/km1230/heroku-mysite/blob/master/static/img/favicon.png?raw=true'></p>
 <h1 align='center'>Dev Junior</h1>
-<p align='center'>This is a personal django blog for interest purpose.<br>
+<p align='center'>This is a django blog for programming interests.<br>
 <a align='center' href='http://devjunior.com' target='_blank'>http://devjunior.com</a></p>
 
 ## Schema:
@@ -23,4 +23,4 @@
 * [ACE Editor](https://ace.c9.io)
 
 ## Author:
-[km1230](https://github.com/km1230/)
+* [km1230](https://github.com/km1230/)
