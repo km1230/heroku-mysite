@@ -227,9 +227,11 @@ List all Post by author
 """
 def edit_list(request):
 	if request.user.is_authenticated:
-		post_list = Post.objects.filter(author=request.user).order_by('-create_time')
+		post_list = Post.objects.filter(author=request.user)
 		error = ''
+		posts = ''
 		if post_list:
+			post_list = post_list.order_by('-create_time')
 			p = Paginator(post_list, 20)
 			page = request.GET.get('page')
 			posts = p.get_page(page)
