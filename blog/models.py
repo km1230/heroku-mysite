@@ -56,11 +56,13 @@ Additional Profile Model
 """
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	gender = models.CharField(null=True, blank=True, max_length=1, choices=(('',''),('M',"M"),('F','F')))
+	gender = models.CharField(null=True, blank=True, max_length=1)
 	day_of_birth = models.DateField(null=True, blank=True)
 	address = models.TextField(null=True, blank=True)
-	city = models.CharField(null=True, blank=True, max_length=100)
+	country = models.CharField(null=True, blank=True, max_length=100)
 	postcode = models.CharField(null=True, blank=True, max_length=6)
+	state = models.CharField(null=True, blank=True, max_length=100)
+	city = models.CharField(null=True, blank=True, max_length=100)
 
 	def __str__(self):
 		return self.user.username

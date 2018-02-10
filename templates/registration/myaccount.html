@@ -60,4 +60,14 @@ MyAccount - {{ block.super }}
 		</div>
 	</div>
 </form>
+
+<script>
+	const country = document.querySelector('#id_country');
+	function updateState(){
+		let request = new XMLHttpRequest()
+		request.open('GET', `https://battuta.medunes.net/api/region/${country.value}/all/?key=36c701b1526496bf74a948b95cb4f620`, true);
+		console.log(request.status)
+	};
+	country.addEventListener('change', updateState)
+</script>
 {% endblock %}
