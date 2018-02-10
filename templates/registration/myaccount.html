@@ -68,7 +68,7 @@ MyAccount - {{ block.super }}
 		request.open('GET', `https://cors-anywhere.herokuapp.com/https://battuta.medunes.net/api/region/${country.value}/all/?key=36c701b1526496bf74a948b95cb4f620`, true);
 		request.onload = function(){
 			if(request.status >= 200 && request.status < 400){
-				let data = JSON.parse(request.response.Text);
+				let data = request.response.Text;
 				console.table(data)
 			}
 		};
