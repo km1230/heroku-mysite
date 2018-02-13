@@ -362,11 +362,11 @@ Sending Email
 """
 def sendmail(request, title):
 	if title == "registration":
-		email_title = 'Kavie Blog - Confirmation of Registration'
+		email_title = 'DevJunior - Confirmation of Registration'
 		email_content = render_to_string('registration/registration_email.html', {'username': request.user.username})
 
 	elif title == "changepassword":
-		email_title = 'Kavie Blog - Password Changed'
+		email_title = 'DevJunior - Password Changed'
 		email_content = render_to_string('registration/changepassword_email.html', {'username': request.user.username})
 
 	recipient = request.user.email
@@ -374,7 +374,7 @@ def sendmail(request, title):
 	send_mail(
 			email_title,
 			'',										#to render plain text message
-			'kavieblog@gmail.com',
+			'devjuniorkm@gmail.com',
 			[recipient,],
 			html_message=email_content,				#to render HTML message
 	)
@@ -407,4 +407,8 @@ def json_feed(request):
 
 	return JsonResponse(data)
 
-
+"""
+PWA
+"""
+def pwa(request):
+	return render(request, 'app.json')
