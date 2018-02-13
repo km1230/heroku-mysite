@@ -412,3 +412,6 @@ PWA
 """
 def pwa(request):
 	return render(request, 'app.json')
+
+def pwa_sw(request):
+	return render(request, 'sw.js')
