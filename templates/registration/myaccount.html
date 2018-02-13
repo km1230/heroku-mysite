@@ -67,12 +67,13 @@ MyAccount - {{ block.super }}
 	function updateState(){
 		state.innerHTML = '<option value selected></option>';
 		let request = new XMLHttpRequest()
-		request.open('GET', `https://cors-anywhere.herokuapp.com/https://battuta.medunes.net/api/region/${country.value}/all/?key=36c701b1526496bf74a948b95cb4f620`, true);
+		request.open('GET', `https://cors-anywhere.herokuapp.com/https://countryrestapi.herokuapp.com/${country.value}/`, true);
 		request.onload = function(){
 			if(request.status >= 200 && request.status < 400){
 				let data = JSON.parse(request.responseText);
-				data.forEach(function(x){
-					state.innerHTML += `<option value=${x.region}>${x.region}</option>`
+				data['states'].forEach(function(x){
+					y = x.replace(/ /g, '_');
+					state.innerHTML += `<option value=${y}>${x}</option>`
 				})
 			}
 		};

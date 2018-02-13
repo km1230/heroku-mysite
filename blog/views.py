@@ -125,6 +125,7 @@ MyAccount
 @login_required
 def useraccount(request):
 	status = request.user.is_authenticated
+	error = ''
 	if request.method == "POST":
 		form = UserAccount(request.POST, instance=request.user)
 		profile_form = UserProfile(request.POST, instance=request.user.profile)
@@ -135,12 +136,12 @@ def useraccount(request):
 		else:
 			form = UserAccount(instance=request.user)
 			profile_form = UserProfile(instance=request.user.profile)
-			error = 'There is something wrong about your information!'
-			return render(request, 'registration/myaccount.html', {'form':form, 'profile_form':profile_form, 'error':error})
+			error = "There's something wrong about your info"
+			#return render(request, 'registration/myaccount.html', {'form':form, 'profile_form':profile_form, 'error':error})
 	else:
 		form = UserAccount(instance=request.user)
 		profile_form = UserProfile(instance=request.user.profile)
-		return render(request, 'registration/myaccount.html', {'form':form, 'profile_form':profile_form})
+	return render(request, 'registration/myaccount.html', {'form':form, 'profile_form':profile_form, 'error':error})
 		
 
 """
