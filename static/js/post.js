@@ -2,9 +2,9 @@ const area = document.querySelector('#id_content');
 let start = area.selectionStart;
 let end = area.selectionEnd;
 const editor = ace.edit('editor');
-ace.config.set('basePath', 'http://www.devjunior.com/static/js/ace/src-noconflict');
-ace.config.set('modePath', 'http://www.devjunior.com/static/js/ace/src-noconflict');
-ace.config.set('themePath', 'http://www.devjunior.com/static/js/ace/src-noconflict');
+ace.config.set('basePath', 'http://devjunior.com/static/js/ace/src-noconflict');
+ace.config.set('modePath', 'http://devjunior.com/static/js/ace/src-noconflict');
+ace.config.set('themePath', 'http://devjunior.com/static/js/ace/src-noconflict');
 let langSelect = document.querySelector('#lang');
 editor.setTheme("ace/theme/clouds");
 
