@@ -388,10 +388,10 @@ def json_feed(request):
 	data = {
 	    "version": "https://jsonfeed.org/version/1",
 	    "title": "Dev Junior",
-	    "home_page_url": "http://devjunior.com",
-	    "feed_url": "http://www.devjunior.com/feed.json",
-	    "icon": "http://www.devjunior.com/static/img/favicon_200.png",
-	    "favicon": "http://www.devjunior.com/static/img/favicon.ef83680e7b40.png",
+	    "home_page_url": "https://devjunior.com",
+	    "feed_url": "https://devjunior.com/feed.json",
+	    "icon": "https://devjunior.com/static/img/favicon_200.png",
+	    "favicon": "https://devjunior.com/static/img/favicon.ef83680e7b40.png",
 	    "items": []
 	}
 	posts = Post.objects.order_by('-create_time')
