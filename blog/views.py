@@ -390,8 +390,8 @@ def json_feed(request):
 	    "title": "Dev Junior",
 	    "home_page_url": "https://devjunior.com",
 	    "feed_url": "https://devjunior.com/feed.json",
-	    "icon": "https://devjunior.com/static/img/favicon_200.png",
-	    "favicon": "https://devjunior.com/static/img/favicon.ef83680e7b40.png",
+	    "icon": "https://devjunior.s3.amazonaws.com/static/img/favicon.png",
+	    "favicon": "https://devjunior.s3.amazonaws.com/static/img/favicon.png",
 	    "items": []
 	}
 	posts = Post.objects.order_by('-create_time')
