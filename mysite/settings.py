@@ -200,12 +200,12 @@ USE_TZ = True
 #Whitenoise
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-"""
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
 """
-
-
 #AWS S3 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
@@ -226,4 +226,4 @@ PRIVATE_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
 #AWS S3 PUBLIC
 AWS_PUBLIC_LOCATION = 'public'
 DEFAULT_FILE_STORAGE = 'mysite.storage_backends.PublicStorage'
-
+"""
