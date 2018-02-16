@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'blog',
     'multiselectfield',
     'social_django',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -195,14 +196,35 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 # css is added, may add js, img for future purposes
 
+"""
+#Whitenoise
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+"""
 
-#Media files for upload and storage
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = '/media/'
+#AWS S3 
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400',}
+
+#AWS S3 STATIC
+AWS_STATIC_LOCATION = 'static'
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_STATIC_LOCATION)
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_STORAGE = 'mysite.storage_backends.StaticStorage'
+
+#AWS S3 MEDIA
+AWS_MEDIA_LOCATION = 'media'
+PRIVATE_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
+
+#AWS S3 PUBLIC
+AWS_PUBLIC_LOCATION = 'public'
+DEFAULT_FILE_STORAGE = 'mysite.storage_backends.PublicStorage'
+

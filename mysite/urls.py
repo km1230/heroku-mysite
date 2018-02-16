@@ -18,7 +18,6 @@ from django.urls import path, include, re_path          #new in Django2
 from django.contrib import admin
 from blog import views as bv
 from django.conf import settings
-from django.conf.urls.static import static
 from django.contrib.auth import views as av
 
 urlpatterns = [
@@ -50,6 +49,4 @@ urlpatterns = [
     path('app.json', bv.pwa, name='pwa'),
     path('sw.js', bv.pwa_sw, name='sw')
 ] 
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -39,7 +39,7 @@ Post New - {{ block.super }}
 	<div class='col-12'>
 		<div class='card'>
 			<div class='card-header d-flex justify-content-center bg-dark text-white'><h1>Post New</h1></div>
-			<form method='POST'>
+			<form method='POST' enctype="multipart/form-data">
 				{% csrf_token %}
 				<div class='card-body'>
 					{% for field in form %}

@@ -208,7 +208,7 @@ def post_new(request):
 		return blogindex(request)
 
 	if request.method == "POST":
-		temp = PostForm(request.POST)     #request.POST to collect data from forms
+		temp = PostForm(request.POST, request.FILES)     #request.POST to collect data from forms
 		if temp.is_valid():
 			content = temp.decrypt_content()
 			postform = temp.save(commit=False)
@@ -275,7 +275,7 @@ def post_edit(request, key):
 		return blogindex(request)
 
 	if request.method == "POST":
-		temp = PostForm(request.POST, instance=post)
+		temp = PostForm(request.POST, request.FILES, instance=post)
 		if temp.is_valid():
 			content = temp.decrypt_content()
 			form = temp.save(commit=False)
