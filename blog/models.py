@@ -5,7 +5,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.template.defaultfilters import truncatewords
 from multiselectfield import MultiSelectField
-from mysite.storage_backends import MediaStorage
+#from mysite.storage_backends import MediaStorage
 
 """
 Post Model
@@ -15,7 +15,7 @@ class Post(models.Model):
 	content = models.TextField()
 	author = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
 	photo = models.URLField(null=True, blank=True)
-	photo_upload = models.ImageField(null=True, blank=True, storage=MediaStorage())
+	photo_upload = models.ImageField(null=True, blank=True)#, storage=MediaStorage())
 	create_time = models.DateTimeField(auto_now_add=True)
 	edit_time = models.DateTimeField(null=True, blank=True, auto_now=True)
 	tag = MultiSelectField(null=True, blank=True, choices=(

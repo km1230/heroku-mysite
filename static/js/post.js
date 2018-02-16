@@ -94,3 +94,6 @@ $('#snippetButton').click(function(){
 $('#delete').click(function(){
 	$('#deleteModal').modal('show');
 });
+
+$('#photo_upload-clear_id').addClass('ml-1');
+$('[for=photo_upload-clear_id]').addClass('ml-4');
