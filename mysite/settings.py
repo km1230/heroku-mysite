@@ -147,7 +147,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
 """
 
 # Update heroku database configuration with $DATABASE_URL.
