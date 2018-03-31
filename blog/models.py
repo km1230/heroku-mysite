@@ -21,6 +21,7 @@ class Post(models.Model):
 	tag = MultiSelectField(null=True, blank=True, choices=(
 		('Python3.6','Python3.6'),		
 		('Django2.0', 'Django2.0'),
+		('PHP', 'PHP'),
 		('Nodejs','Nodejs'),
 		('Javascript','Javascript'),
 		('CSS','CSS'),
